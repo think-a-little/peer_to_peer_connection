@@ -16,8 +16,10 @@ public:
     flight_number(flight_number),
     cycle_number(cycle_number),
     segment_number(segment_number) {} // первый параметр в шарпах почему-то строка
+
     void receive() override;
     void send(std::string message) override;
+    void func();
 };
 
 #endif // APCS_H

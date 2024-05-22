@@ -7,6 +7,9 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
 
 class system
 {
@@ -15,13 +18,22 @@ protected:
     int sock;
     sockaddr_in addr;
     char buffer[1024];
+
+    std::mutex mtx;
+    std::condition_variable cv;
+    bool ready = false;
 public:
     system();
     ~system();
+
     void connect();
     virtual void receive()=0;
     virtual void send(std::string message)=0;
     void finish();
+
+    void setReady(bool status);
+    bool isReady();
+    void waiting();
 };
 
 #endif // MODEL_H

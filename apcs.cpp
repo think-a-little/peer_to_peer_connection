@@ -1,5 +1,10 @@
 #include "apcs.h"
 
-void receive() {}
+void APCS::receive() {
+    waiting();
+}
 
-void send(std::string message) {}
+void APCS::send(std::string message) {
+    std::this_thread::sleep_for(std::chrono::seconds(1)); // Имитация задержки
+    setReady(true);
+}

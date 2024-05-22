@@ -2,10 +2,6 @@
 
 system::system() {
     connect();
-
-//        std::string data=std::to_string(flight_type)+std::to_string(flight_number)+
-//                std::to_string(cycle_number)+std::to_string(segment_number);
-//        send(data);
 }
 
 void system::connect() {
@@ -20,17 +16,24 @@ void system::connect() {
             bind(sock, (struct sockaddr*)&addr, sizeof(addr));
 }
 
-//void Model::receive() {
-//    socklen_t addr_size = sizeof(addr);
-//    recvfrom(sock, buffer, 1024, 0, (struct sockaddr*)&addr, &addr_size);
-//}
-
-//void Model::send(std::string message) {
-//    sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&addr, sizeof(addr));
-//}
-
 void system::finish() {
     if(sock == 0) close(sock);
+}
+
+void system::setReady(bool status) {
+        std::lock_guard<std::mutex> lock(mtx);
+        ready = status;
+        cv.notify_all();
+    }
+
+bool system::isReady() {
+    std::lock_guard<std::mutex> lock(mtx);
+    return ready;
+}
+
+void system::waiting() {
+    std::unique_lock<std::mutex> lock(mtx); // Создаем unique_lock, который автоматически блокирует мьютекс
+    cv.wait(lock, [this]{return isReady();}); // Используем unique_lock в качестве аргумента для cv.wait()
 }
 
 system::~system() {
