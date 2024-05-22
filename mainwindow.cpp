@@ -1,12 +1,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "apcs.h"
+#include "apcs_system.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    AS= new APCS(1,1,1,1);
+    AS= new apcs_system(1,1,1,1);
 }
 
 MainWindow::~MainWindow()

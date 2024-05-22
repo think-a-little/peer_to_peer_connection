@@ -1,6 +1,6 @@
-#include "apcs.h"
+#include "apcs_system.h"
 
-APCS::APCS(int flight_type, int flight_number, int cycle_number, int segment_number) : system(),
+apcs_system::apcs_system(int flight_type, int flight_number, int cycle_number, int segment_number) : system(),
     flight_type(flight_type),
     flight_number(flight_number),
     cycle_number(cycle_number),
@@ -18,7 +18,7 @@ segment_number(segment_number) {
     senderThread.join();
 }
 
-void APCS::receive() {
+void apcs_system::receive() {
    if(reciveDo){
 //    std::this_thread::sleep_for(std::chrono::seconds(1)); // Имитация задержки
 //    char buffer[1024];
@@ -32,7 +32,7 @@ void APCS::receive() {
    }
 }
 
-void APCS::send(std::string message) {
+void apcs_system::send(std::string message) {
     message = "Hello, Server!";
     sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&addr, sizeof(addr));
 }
