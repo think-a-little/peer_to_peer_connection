@@ -10,13 +10,17 @@
 
 class Model
 {
-private:
+protected:
     const int port=12000;
+    int sock;
+    sockaddr_in addr;
+    char buffer[1024];
 public:
-    Model();
-    virtual void get()=0;
-    virtual void send()=0;
-
+    Model(std::string who, int flight_type, int flight_number, int cycle_number, int segment_number);
+    void connect(std::string who);
+    void receive();
+    void send(std::string message);
+    void finish();
 };
 
 #endif // MODEL_H
