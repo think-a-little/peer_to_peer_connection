@@ -32,7 +32,8 @@ SOURCES += \
     sks.cpp \
     stabilization.cpp \
     tenzometria.cpp \
-    thirdtypemessage.cpp
+    thirdtypemessage.cpp \
+    system.cpp
 
 HEADERS += \
     acustic.h \
@@ -49,7 +50,8 @@ HEADERS += \
     sks.h \
     stabilization.h \
     tenzometria.h \
-    thirdtypemessage.h
+    thirdtypemessage.h \
+    system.h
 
 FORMS += \
     acustic.ui \

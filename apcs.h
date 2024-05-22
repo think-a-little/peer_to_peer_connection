@@ -1,27 +1,22 @@
 #ifndef APCS_H
 #define APCS_H
 
-#include <QMainWindow>
+#include "system.h"
 
-namespace Ui {
-class apcs;
-}
-
-class apcs : public QMainWindow
+class APCS : system
 {
-    Q_OBJECT
-
-public:
-    explicit apcs(QWidget *parent = nullptr);
-    ~apcs();
-
-private slots:
-    void on_firstTypeMesageBut_clicked();
-
-    void on_secondTypeMesageBut_clicked();
-
 private:
-    Ui::apcs *ui;
+    int flight_type;
+    int flight_number;
+    int cycle_number;
+    int segment_number;
+    bool reciveDo=true, sendDo;
+public:
+    APCS(int flight_type, int flight_number, int cycle_number, int segment_number); // первый параметр в шарпах почему-то строка
+
+    void receive() override;
+    void send(std::string message) override;
+    void func();
 };
 
 #endif // APCS_H
