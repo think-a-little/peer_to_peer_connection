@@ -16,6 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    apcs_system.cpp \
     SRJ_Consts.cpp \
     acustic.cpp \
     apcs.cpp \
@@ -33,8 +34,10 @@ SOURCES += \
     stabilization.cpp \
     tenzometria.cpp \
     thirdtypemessage.cpp
+    system.cpp
 
 HEADERS += \
+    apcs_system.h \
     acustic.h \
     apcs.h \
     crack.h \
@@ -50,6 +53,7 @@ HEADERS += \
     stabilization.h \
     tenzometria.h \
     thirdtypemessage.h
+    system.h
 
 FORMS += \
     acustic.ui \
