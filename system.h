@@ -7,6 +7,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
+#include <QDebug>
 #include <thread>
 #include <mutex>
 #include <condition_variable>

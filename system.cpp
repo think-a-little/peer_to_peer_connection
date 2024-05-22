@@ -1,7 +1,7 @@
 #include "system.h"
 
 system::system() {
-    connect();
+//    connect();
 }
 
 void system::connect() {
