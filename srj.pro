@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     SRJ_Consts.cpp \
+    apcs_system.cpp \
     acustic.cpp \
     apcs.cpp \
     crack.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     measerement_for.cpp \
+    system.cpp \
     protsrjdata.cpp \
     secondtypemessage.cpp \
     sks.cpp \
@@ -36,6 +38,7 @@ SOURCES += \
 
 HEADERS += \
     acustic.h \
+    apcs_system.h \
     apcs.h \
     crack.h \
     dist_system.h \
@@ -44,6 +47,7 @@ HEADERS += \
     fourthtypemessage.h \
     mainwindow.h \
     measerement_for.h \
+    system.h \
     protsrjdata.h \
     secondtypemessage.h \
     sks.h \
