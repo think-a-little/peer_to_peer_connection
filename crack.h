@@ -2,6 +2,7 @@
 #define CRACK_H
 
 #include <QMainWindow>
+#include <regex>
 
 namespace Ui {
 class crack;
