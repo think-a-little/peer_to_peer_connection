@@ -30,5 +30,4 @@ void apcs::on_secondTypeMesageBut_clicked()
         return;
     }
 
->>>>>>>>> Temporary merge branch 2
 }
