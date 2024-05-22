@@ -16,8 +16,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+<<<<<<<<< Temporary merge branch 1
+    apcs.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    system.cpp
+
+HEADERS += \
+    apcs.h \
+    mainwindow.h \
+    system.h
+=========
     SRJ_Consts.cpp \
-    apcs_system.cpp \
     acustic.cpp \
     apcs.cpp \
     crack.cpp \
@@ -28,17 +38,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     measerement_for.cpp \
-    system.cpp \
     protsrjdata.cpp \
     secondtypemessage.cpp \
     sks.cpp \
     stabilization.cpp \
     tenzometria.cpp \
     thirdtypemessage.cpp
+    system.cpp
 
 HEADERS += \
     acustic.h \
-    apcs_system.h \
     apcs.h \
     crack.h \
     dist_system.h \
@@ -47,13 +56,13 @@ HEADERS += \
     fourthtypemessage.h \
     mainwindow.h \
     measerement_for.h \
-    system.h \
     protsrjdata.h \
     secondtypemessage.h \
     sks.h \
     stabilization.h \
     tenzometria.h \
     thirdtypemessage.h
+    system.h
 
 FORMS += \
     acustic.ui \
