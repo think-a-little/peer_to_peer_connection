@@ -8,7 +8,7 @@
 #include <unistd.h>
 #include <iostream>
 
-class Model
+class system
 {
 protected:
     const int port=12000;
@@ -16,10 +16,11 @@ protected:
     sockaddr_in addr;
     char buffer[1024];
 public:
-    Model(std::string who, int flight_type, int flight_number, int cycle_number, int segment_number);
-    void connect(std::string who);
-    void receive();
-    void send(std::string message);
+    system();
+    ~system();
+    void connect();
+    virtual void receive()=0;
+    virtual void send(std::string message)=0;
     void finish();
 };
 

@@ -16,15 +16,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    acustic_system.cpp \
     apcs.cpp \
     main.cpp \
     mainwindow.cpp \
-    model.cpp
+    system.cpp
 
 HEADERS += \
+    acustic_system.h \
     apcs.h \
     mainwindow.h \
-    model.h
+    system.h
 
 FORMS += \
     APCS.ui \
