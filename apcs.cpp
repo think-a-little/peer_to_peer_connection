@@ -1,14 +1,15 @@
 #include "apcs.h"
 #include "ui_apcs.h"
 #include <regex>
-apcs::apcs(QWidget *parent) :
+
+APCS::APCS(QWidget *parent) : system(),
     QMainWindow(parent),
     ui(new Ui::apcs)
 {
     ui->setupUi(this);
 }
 
-APCS::APCS(int flight_type, int flight_number, int cycle_number, int segment_number) : system(),
+APCS::APCS(int flight_type, int flight_number, int cycle_number, int segment_number) : system(), ui(new Ui::apcs),
     flight_type(flight_type),
     flight_number(flight_number),
     cycle_number(cycle_number),
