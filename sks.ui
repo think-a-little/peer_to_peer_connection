@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>sks</class>
+ <widget class="QWidget" name="sks">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>654</width>
+    <height>369</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>341</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Введите код системы назначения</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>401</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Остановить отправку сообщений АСУ ТП</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="secondTypeMsgText">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>401</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>301</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>введите значения от 0 до 6</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="secondTypeMsgBut">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>401</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>отправить второй тип сообщения</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="firstTypeMsgText">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>401</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="textEdit_3">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>40</y>
+     <width>211</width>
+     <height>321</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="firstTypeMsgBut">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>401</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Отправить первый тип сообщения</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>260</y>
+     <width>401</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Продолжить отправку сообщений АСУ ТП</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -17,7 +17,7 @@
    <bool>true</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="flight_type_text">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -27,7 +27,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_2">
+   <widget class="QTextEdit" name="flight_number_text">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -37,7 +37,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_3">
+   <widget class="QTextEdit" name="cikl_number_text">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -47,7 +47,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_4">
+   <widget class="QTextEdit" name="segment_number_text">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -109,7 +109,7 @@
      <string>номер полета</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="APCS_button">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -135,7 +135,7 @@
      <string>код системы</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_5">
+   <widget class="QTextEdit" name="code_tenz_text">
     <property name="geometry">
      <rect>
       <x>100</x>
@@ -145,7 +145,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="tenzometria_button">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -158,7 +158,7 @@
      <string>Система тензометрии</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="acustic_sys_button">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -171,7 +171,7 @@
      <string>АЭ система</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_6">
+   <widget class="QTextEdit" name="code_AS_text">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -181,7 +181,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="stabilization_system_button">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -191,10 +191,10 @@
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string>система стабилизации</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="measerement_system_button">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -207,7 +207,7 @@
      <string>Система измерения перемещений </string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="sksButton">
     <property name="geometry">
      <rect>
       <x>270</x>
@@ -220,7 +220,7 @@
      <string>СКС</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_7">
+   <widget class="QPushButton" name="dist_sys_button">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -255,7 +255,7 @@
      <string>код системы</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_7">
+   <widget class="QTextEdit" name="code_watch_text">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -265,7 +265,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_8">
+   <widget class="QPushButton" name="crack_sys_button">
     <property name="geometry">
      <rect>
       <x>280</x>
@@ -281,7 +281,7 @@
      <string>подсистема регистрации трещин</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit_8">
+   <widget class="QTextEdit" name="code_crack_text">
     <property name="geometry">
      <rect>
       <x>360</x>

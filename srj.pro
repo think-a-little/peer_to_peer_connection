@@ -16,18 +16,51 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    SRJ_Consts.cpp \
+    acustic.cpp \
+    apcs.cpp \
+    crack.cpp \
+    dist_system.cpp \
+    fifthtypemessage.cpp \
+    firsttypemassage.cpp \
+    fourthtypemessage.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    measerement_for.cpp \
+    protsrjdata.cpp \
+    secondtypemessage.cpp \
+    sks.cpp \
+    stabilization.cpp \
+    tenzometria.cpp \
+    thirdtypemessage.cpp
 
 HEADERS += \
-    mainwindow.h
+    acustic.h \
+    apcs.h \
+    crack.h \
+    dist_system.h \
+    fifthtypemessage.h \
+    firsttypemassage.h \
+    fourthtypemessage.h \
+    mainwindow.h \
+    measerement_for.h \
+    protsrjdata.h \
+    secondtypemessage.h \
+    sks.h \
+    stabilization.h \
+    tenzometria.h \
+    thirdtypemessage.h
 
 FORMS += \
     APCS.ui \
-    SKS.ui \
+    acustic.ui \
+    crack.ui \
+    dist_system.ui \
     mainwindow.ui \
     measerement_for.ui \
-    stabilization_form.ui
+    sks.ui \
+    stabilization_form.ui \
+    tenzometria.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
