@@ -52,14 +52,14 @@ HEADERS += \
     thirdtypemessage.h
 
 FORMS += \
-    APCS.ui \
     acustic.ui \
+    apcs.ui \
     crack.ui \
     dist_system.ui \
     mainwindow.ui \
     measerement_for.ui \
     sks.ui \
-    stabilization_form.ui \
+    stabilization.ui \
     tenzometria.ui
 
 # Default rules for deployment.

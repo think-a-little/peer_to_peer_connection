@@ -15,6 +15,11 @@ public:
     explicit dist_system(QWidget *parent = nullptr);
     ~dist_system();
 
+private slots:
+    void on_firstTypeMesageBut_clicked();
+
+    void on_secondTypeMesageBut_clicked();
+
 private:
     Ui::dist_system *ui;
 };

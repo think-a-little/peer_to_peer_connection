@@ -1,8 +1,8 @@
 #include "stabilization.h"
-#include "ui_stabilization_form.h"
-
+#include "ui_stabilization.h"
+#include <regex>
 stabilization::stabilization(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::stabilization)
 {
     ui->setupUi(this);
@@ -11,4 +11,22 @@ stabilization::stabilization(QWidget *parent) :
 stabilization::~stabilization()
 {
     delete ui;
+}
+
+void stabilization::on_firstTypeMesageBut_clicked()
+{
+    std::regex pattern("[0-6]{1,480}");
+    if (!(std::regex_match(ui->firstTypeMsgText->toPlainText().toStdString(),pattern))){
+        ui->firstTypeMsgText->setText("Ошибка");
+        return;
+    }
+}
+
+void stabilization::on_secondTypeMesageBut_clicked()
+{
+    std::regex pattern("[a-zA-Z0-5-/]{1,1}");
+    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
+        ui->secondTypeMsgText->setText("Ошибка");
+        return;
+    }
 }

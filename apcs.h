@@ -1,22 +1,27 @@
 #ifndef APCS_H
 #define APCS_H
 
-#include <QWidget>
+#include <QMainWindow>
 
 namespace Ui {
-class APCS;
+class apcs;
 }
 
-class APCS : public QWidget
+class apcs : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit APCS(QWidget *parent = nullptr);
-    ~APCS();
+    explicit apcs(QWidget *parent = nullptr);
+    ~apcs();
+
+private slots:
+    void on_firstTypeMesageBut_clicked();
+
+    void on_secondTypeMesageBut_clicked();
 
 private:
-    Ui::APCS *ui;
+    Ui::apcs *ui;
 };
 
 #endif // APCS_H

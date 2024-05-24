@@ -13,65 +13,6 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QTextEdit" name="textEdit_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>150</y>
-     <width>341</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>70</y>
-     <width>341</width>
-     <height>34</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>отправить певрый тип сообщения</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>180</y>
-     <width>341</width>
-     <height>34</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Отправить второй тип сообщения</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>40</y>
-     <width>321</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>120</y>
-     <width>331</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Введите код системы назначения</string>
-   </property>
-  </widget>
   <widget class="QTextEdit" name="textEdit_3">
    <property name="geometry">
     <rect>
@@ -93,6 +34,65 @@
    </property>
    <property name="text">
     <string>Введите значение от 0 до 6</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="secondTypeMesageBut">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>180</y>
+     <width>341</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Отправить второй тип сообщения</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>120</y>
+     <width>331</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Введите код системы назначения</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="secondTypeMsgText">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>341</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="firstTypeMesageBut">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>70</y>
+     <width>341</width>
+     <height>34</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>отправить певрый тип сообщения</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="firstTypeMsgText">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>341</width>
+     <height>21</height>
+    </rect>
    </property>
   </widget>
  </widget>
