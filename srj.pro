@@ -28,13 +28,17 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     measerement_for.cpp \
+    protsrj.cpp \
     protsrjdata.cpp \
     secondtypemessage.cpp \
     sks.cpp \
+    sks_system.cpp \
+    srj_consts.cpp \
     stabilization.cpp \
     tenzometria.cpp \
     thirdtypemessage.cpp \
-    system.cpp
+    system.cpp \
+    zerotypemesage.cpp
 
 HEADERS += \
     apcs_system.h \
@@ -47,13 +51,17 @@ HEADERS += \
     fourthtypemessage.h \
     mainwindow.h \
     measerement_for.h \
+    protsrj.h \
     protsrjdata.h \
     secondtypemessage.h \
     sks.h \
+    sks_system.h \
+    srj_consts.h \
     stabilization.h \
     tenzometria.h \
     thirdtypemessage.h \
-    system.h
+    system.h \
+    zerotypemesage.h
 
 FORMS += \
     acustic.ui \
@@ -70,3 +78,5 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES +=

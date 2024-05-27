@@ -6,7 +6,6 @@
 namespace Ui {
 class apcs;
 }
-
 class apcs : public QMainWindow
 {
     Q_OBJECT
@@ -14,7 +13,6 @@ class apcs : public QMainWindow
 public:
     explicit apcs(QWidget *parent = nullptr);
     ~apcs();
-
 private slots:
     void on_firstTypeMesageBut_clicked();
 

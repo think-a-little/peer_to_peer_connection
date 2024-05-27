@@ -4,6 +4,7 @@
 #include "tenzometria.h"
 #include "dist_system.h"
 #include "ui_dist_system.h"
+#include "apcs_system.h"
 #include <qdebug.h>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,6 +36,10 @@ void MainWindow::on_sksButton_clicked()
 void MainWindow::on_APCS_button_clicked()
 {
 apcs_form->show();
+apcs_system1 = new apcs_system(ui->flight_type_text->toPlainText().toUInt(),
+                               ui->flight_number_text->toPlainText().toInt(),
+                               ui->cikl_number_text->toPlainText().toInt(),
+                               ui->segment_number_text->toPlainText().toUInt());
 }
 
 void MainWindow::on_measerement_system_button_clicked()

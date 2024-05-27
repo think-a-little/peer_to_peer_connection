@@ -4,10 +4,10 @@
 #include<stdexcept>
 #include<cstdint>
 #include<vector>
-class FirstTypeMassage:ProtSRJData
+class FirstTypeMassage:public ProtSRJData
 {
-private:
 public:
+    std::vector<uint8_t> message_data;
     void add_data(std::vector<char> data) override;
 
 };

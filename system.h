@@ -1,5 +1,5 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef SYSTEM_H
+#define SYSTEM_H
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -15,7 +15,7 @@
 class system
 {
 protected:
-    const int port=12000;
+    const int port=21000;
     int sock;
     sockaddr_in addr;
     char buffer[1024];

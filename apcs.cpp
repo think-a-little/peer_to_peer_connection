@@ -1,11 +1,13 @@
 #include "apcs.h"
 #include "ui_apcs.h"
 #include <regex>
+
 apcs::apcs(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::apcs)
 {
     ui->setupUi(this);
+
 }
 
 apcs::~apcs()

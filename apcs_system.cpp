@@ -27,11 +27,10 @@ void apcs_system::receive() {
 //    std::cout << "Ответ сервера: " << buffer << std::endl;
 
 //    setReady(true);
-    qDebug()<<"АСУ ТП начала работу";
+    qDebug()<<"АСУ ТП начала работу" <<flight_type;
     reciveDo=false;
    }
 }
-
 void apcs_system::send(std::string message) {
     message = "Hello, Server!";
     sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&addr, sizeof(addr));

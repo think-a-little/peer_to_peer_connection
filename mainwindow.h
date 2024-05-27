@@ -10,6 +10,7 @@
 #include "crack.h"
 #include "dist_system.h"
 #include "tenzometria.h"
+#include "apcs_system.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,6 +22,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    apcs_system *apcs_system1;
     apcs *apcs_form;
     stabilization *stabilization_form;
     measerement_for *measerement_form;

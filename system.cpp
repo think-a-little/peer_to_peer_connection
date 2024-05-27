@@ -1,19 +1,19 @@
 #include "system.h"
 
 system::system() {
-//    connect();
+ //   connect();
 }
 
 void system::connect() {
     sock = socket(AF_INET, SOCK_DGRAM, 0);
-        if (sock != 0) {
-            std::cerr << "Ошибка создания сокета" << std::endl;
-            exit(EXIT_FAILURE);
-        }
-            addr.sin_family = AF_INET; // IPv4
-            addr.sin_port = htons(port); // Порт
-            addr.sin_addr.s_addr = INADDR_ANY; // Принимаемые все IP адреса
-            bind(sock, (struct sockaddr*)&addr, sizeof(addr));
+    if (sock != 0) {
+        std::cerr << "Ошибка создания сокета" << std::endl;
+        exit(EXIT_FAILURE);
+    }
+    addr.sin_family = AF_INET; // IPv4
+    addr.sin_port = htons(port); // Порт
+    addr.sin_addr.s_addr = INADDR_ANY; // Принимаемые все IP адреса
+    bind(sock, (struct sockaddr*)&addr, sizeof(addr));
 }
 
 void system::finish() {
@@ -21,10 +21,10 @@ void system::finish() {
 }
 
 void system::setReady(bool status) {
-        std::lock_guard<std::mutex> lock(mtx);
-        ready = status;
-        cv.notify_all();
-    }
+    std::lock_guard<std::mutex> lock(mtx);
+    ready = status;
+    cv.notify_all();
+}
 
 bool system::isReady() {
     std::lock_guard<std::mutex> lock(mtx);

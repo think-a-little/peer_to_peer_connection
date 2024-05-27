@@ -2,7 +2,7 @@
 #define THIRDTYPEMESSAGE_H
 #include "protsrjdata.h"
 
-class ThirdTypeMessage:ProtSRJData
+class ThirdTypeMessage:public ProtSRJData
 {
 public:
     void add_data(std::vector<char> data) override;
