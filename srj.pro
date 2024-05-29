@@ -16,11 +16,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    acustic_system.cpp \
     apcs_system.cpp \
     SRJ_Consts.cpp \
     acustic.cpp \
     apcs.cpp \
     crack.cpp \
+    crack_system.cpp \
     dist_system.cpp \
     fifthtypemessage.cpp \
     firsttypemassage.cpp \
@@ -28,6 +30,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     measerement_for.cpp \
+    measerement_system.cpp \
     messagesendthread.cpp \
     protsrj.cpp \
     protsrjdata.cpp \
@@ -36,22 +39,28 @@ SOURCES += \
     sks_system.cpp \
     srj_consts.cpp \
     stabilization.cpp \
+    stabilization_system.cpp \
+    system_dist.cpp \
     tenzometria.cpp \
+    tenzometria_system.cpp \
     thirdtypemessage.cpp \
     system.cpp \
     zerotypemesage.cpp
 
 HEADERS += \
+    acustic_system.h \
     apcs_system.h \
     acustic.h \
     apcs.h \
     crack.h \
+    crack_system.h \
     dist_system.h \
     fifthtypemessage.h \
     firsttypemassage.h \
     fourthtypemessage.h \
     mainwindow.h \
     measerement_for.h \
+    measerement_system.h \
     messagesendthread.h \
     protsrj.h \
     protsrjdata.h \
@@ -60,7 +69,10 @@ HEADERS += \
     sks_system.h \
     srj_consts.h \
     stabilization.h \
+    stabilization_system.h \
+    system_dist.h \
     tenzometria.h \
+    tenzometria_system.h \
     thirdtypemessage.h \
     system.h \
     zerotypemesage.h

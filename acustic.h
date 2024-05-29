@@ -18,7 +18,7 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
-
+#include "acustic_system.h"
 #define BROADCAST_ADDRESS "255.255.255.255"
 #define BROADCAST_PORT 37020
 
@@ -35,7 +35,7 @@ class acustic : public QMainWindow
 public:
     explicit acustic(QWidget *parent = nullptr);
     ~acustic();
-
+    acustic_system* acustic_sys;
     void con();
 
     void finish();

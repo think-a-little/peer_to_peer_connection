@@ -24,7 +24,7 @@ void crack::on_firstTypeMesageBut_clicked()
         senderThread = new MessageSendThreadCrack(this);
         connect(senderThread, &MessageSendThreadCrack::messageSend, this, &crack::handleMessageSend);
     }
-    senderThread->message =" APCS 1 " + ui->firstTypeMsgText->toPlainText().toStdString();
+    senderThread->message =" crack 1 " + ui->firstTypeMsgText->toPlainText().toStdString();
     senderThread->start();
 }
 

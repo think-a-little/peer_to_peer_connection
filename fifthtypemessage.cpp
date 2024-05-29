@@ -1,7 +1,7 @@
 #include "fifthtypemessage.h"
 #include <vector>
 #include<stdexcept>
-void FifthTypeMessage:: add_data(std::vector<char> data) {
+void FifthTypeMessage:: add_data(std::string data) {
     if (!data.empty()) {
               throw std::runtime_error("Data is not empty in fifth type message");
           }

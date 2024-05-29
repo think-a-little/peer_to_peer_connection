@@ -1,6 +1,6 @@
 #include "zerotypemesage.h"
 #include <stdexcept>
-void ZeroTypeMesage::add_data(std::vector<char> data){
+void ZeroTypeMesage::add_data(std::string data){
     if (data.empty()){
         message_data.resize(1);
         message_data[0]='-';

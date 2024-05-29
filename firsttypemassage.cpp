@@ -3,7 +3,7 @@
 #include <stdexcept>
 #include <string>
 #include <cstddef> // Для std::size_t
-void FirstTypeMassage:: add_data(std::vector<char> data){
+void FirstTypeMassage:: add_data(std::string data){
     if (data.empty()) {
         throw std::runtime_error("Data is null in first type message");
     }

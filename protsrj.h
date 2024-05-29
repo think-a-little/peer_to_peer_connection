@@ -3,7 +3,7 @@
 #include <cstdint>
 #include "protsrjdata.h"
 #include <vector>
-#include <sstream>
+#include <string>
 class ProtSRJ
 {
 public:
@@ -15,8 +15,8 @@ public:
    ProtSRJ ProtSRJ_create(uint8_t source, std::vector<uint8_t> date_and_time);
    ProtSRJ parse_packet(std::vector<uint8_t> packet);
    std::vector<uint8_t> ToPacket();
-   void add_number_message(short num_message);
-   void add_data(uint8_t message_type, std::vector<char> data);
+   void add_number_message(uint8_t num_message);
+   void add_data(uint8_t message_type, std::string data);
    std::vector<char> get_char_date();
    void create_message_data(uint8_t message_type);
    std::vector<uint8_t> create_date();

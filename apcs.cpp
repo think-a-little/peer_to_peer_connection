@@ -31,32 +31,7 @@ void apcs::on_firstTypeMesageBut_clicked()
     }
     std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
     as->send_first_type_message(msg);
-//    int i=0;
-//    senderThread->buffer[i]=APCS;
-//    i++;
-//    senderThread->buffer[i]=WARNING_MESSAGE;
-//    i++;
-//    senderThread->buffer[i]=id_message;
-//    id_message++;
-//    i++;
-//    int j=0;
 
-//    while (j!=msg.size()) {
-//        senderThread->buffer[i]=msg[j];
-//        j++;
-//        i++;
-//    }
-//    j=0;
-//    ProtSRJ date_creator;
-//    std::vector<uint8_t> date=date_creator.create_date();
-//    while (j!=sizeof (date)){
-//        senderThread->buffer[i]=date[j];
-//        i++;
-//        j++;
-//    }
-//    senderThread->buffer[i]=0;
-//    senderThread->start();
-//    qDebug()<<senderThread->buffer;
 }
 
 void apcs::on_secondTypeMesageBut_clicked()

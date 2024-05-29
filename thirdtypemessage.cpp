@@ -5,7 +5,7 @@
 #include <cstddef> // Для std::size_t
 #include "srj_consts.h"
 SRJ_Consts checker1;
-void ThirdTypeMessage::add_data(std::vector<char> data){
+void ThirdTypeMessage::add_data(std::string data){
     if (data.empty()) {
                 throw std::runtime_error("Data is null in third type message");
             }

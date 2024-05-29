@@ -1,6 +1,7 @@
 #include "acustic.h"
 #include "ui_acustic.h"
 #include <regex>
+
 acustic::acustic(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::acustic)

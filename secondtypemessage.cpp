@@ -4,7 +4,7 @@
 #include <vector>
 #include <cstddef> // Для std::size_t
 
-void SecondTypeMessage::add_data(std::vector<char> data){
+void SecondTypeMessage::add_data(std::string data){
     if (data.empty()) {
         throw std::runtime_error("Data is null in second type message");
     }

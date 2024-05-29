@@ -8,7 +8,7 @@ class FirstTypeMassage:public ProtSRJData
 {
 public:
     std::vector<uint8_t> message_data;
-    void add_data(std::vector<char> data) override;
+    void add_data(std::string data) override;
 
 };
 #endif // FIRSTTYPEMASSAGE_H

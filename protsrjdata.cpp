@@ -17,7 +17,7 @@ std::vector<char> ProtSRJData:: parse_data() {
 
             return parsed_data;
 };
-void ProtSRJData::add_data(std::vector<char> data){
+void ProtSRJData::add_data(std::string data){
     if (data.empty()) {
         throw std::runtime_error("Data is null in first type message");
     }

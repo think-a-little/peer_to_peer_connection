@@ -6,6 +6,7 @@
 #include "ui_dist_system.h"
 #include "apcs_system.h"
 #include <qdebug.h>
+#include "srj_consts.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -53,14 +54,14 @@ void MainWindow::on_measerement_system_button_clicked()
 void MainWindow::on_stabilization_system_button_clicked()
 {
     this->hide();
-
+    stabilization_form->stab_sys = new stabilization_system(SYSTEM_OF_STABILIZATION);
     stabilization_form->show();
 }
 
 void MainWindow::on_tenzometria_button_clicked()
 {
     this->hide();
-
+//    tenzometria_form->tenz_sys= new tenzometria_system(ui->code_tenz_text->toPlainText().toUInt());
     tenzometria_form->show();
 
 }
@@ -79,6 +80,6 @@ void MainWindow::on_crack_sys_button_clicked()
 
 void MainWindow::on_acustic_sys_button_clicked()
 {    this->hide();
-
+     acustic_form->acustic_sys= new acustic_system(ui->code_AS_text->toPlainText().toInt());
      acustic_form->show();
 }
