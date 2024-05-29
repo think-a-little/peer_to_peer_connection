@@ -3,6 +3,7 @@
 #include <cstdint>
 #include "protsrjdata.h"
 #include <vector>
+#include <sstream>
 class ProtSRJ
 {
 public:

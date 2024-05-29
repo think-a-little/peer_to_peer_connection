@@ -23,18 +23,49 @@ std::vector<uint8_t> ProtSRJ::create_date(){
     std::string date;
     std::time_t currentTime = std::time(nullptr);
     std::tm* timeInfo = std::localtime(&currentTime);
-    std::string year =std::to_string(timeInfo->tm_year-100);
-    std::string month = std::to_string(timeInfo->tm_mon+1);
-    std::string day = std::to_string(timeInfo->tm_mday);
-    std::string hour = std::to_string(timeInfo->tm_hour);
-    std::string min = std::to_string(timeInfo->tm_min);
-    std::string sec = std::to_string(timeInfo->tm_sec);
+
+    std::ostringstream oss;
+        oss.fill('0');
+        oss.width(2);
+    oss << std::to_string(timeInfo->tm_year-100);
+    std::string year =oss.str();
+
+    std::ostringstream oss1;
+        oss1.fill('0');
+        oss1.width(2);
+    oss1 << std::to_string(timeInfo->tm_mon+1);
+    std::string month = oss1.str();
+
+    std::ostringstream oss2;
+        oss2.fill('0');
+        oss2.width(2);
+    oss2 << std::to_string(timeInfo->tm_mday);
+    std::string day = oss2.str();
+
+    std::ostringstream oss3;
+        oss3.fill('0');
+        oss3.width(2);
+    oss3 << std::to_string(timeInfo->tm_hour);
+    std::string hour = oss3.str();
+
+    std::ostringstream oss4;
+        oss4.fill('0');
+        oss4.width(2);
+    oss4 << std::to_string(timeInfo->tm_min);
+    std::string min = oss4.str();
+
+    std::ostringstream oss5;
+        oss5.fill('0');
+        oss5.width(2);
+    oss5 << std::to_string(timeInfo->tm_sec);
+    std::string sec = oss5.str();
+
     auto now = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch());
     unsigned int milliseconds = static_cast<unsigned int>(duration.count()) / 1000;
     unsigned int roundedMilliseconds = milliseconds / 10;
     std::string milesecond = std::to_string(roundedMilliseconds);
-    date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+','+milesecond;
+    date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+',';
     std::vector<uint8_t> res(date.begin(),date.end());
     return res;
 }
