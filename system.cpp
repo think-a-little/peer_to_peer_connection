@@ -8,6 +8,38 @@ system::system() {
 void system::send_zero_type_message(){
     qDebug()<<"0 type msg /n";
 }
+void system::send_first_type_message(std::string msg){
+    if (!senderThread)
+    senderThread=new MessageSendThread();
+    int i=0;
+    senderThread->buffer[i]=APCS;
+    i++;
+    senderThread->buffer[i]=WARNING_MESSAGE;
+    i++;
+    senderThread->buffer[i]=id_message;
+    id_message++;
+    i++;
+    int j=0;
+
+    while (j!=msg.size()) {
+        senderThread->buffer[i]=msg[j];
+        j++;
+        i++;
+    }
+    j=0;
+    ProtSRJ date_creator;
+    std::vector<uint8_t> date=date_creator.create_date();
+    while (j!=sizeof (date)){
+        senderThread->buffer[i]=date[j];
+        i++;
+        j++;
+    }
+    senderThread->buffer[i]=0;
+    senderThread->start();
+    qDebug()<<senderThread->buffer;
+
+}
+
 void system::send_fifth_type_message(){
     qDebug()<<"0 type msg /n";
 }
@@ -19,14 +51,6 @@ void system::send_third_type_message(std::vector<char> data){
 }
 void system::send_fourth_type_message(){
     qDebug()<<"0 type msg /n";
-}
-std::vector<uint8_t> system::send_first_type_message(std::vector<char> data){
-    ProtSRJ packet, creator;
-    packet = creator.ProtSRJ_create(source_code);
-    packet.add_number_message(id_message);
-    packet.add_data(WARNING_MESSAGE,data);
-    return packet.ToPacket();
-
 }
 system::system(uint8_t source_code,std::string log){
     this->source_code=source_code;

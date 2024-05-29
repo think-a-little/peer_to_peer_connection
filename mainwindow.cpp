@@ -30,32 +30,31 @@ MainWindow::~MainWindow()
 void MainWindow::on_sksButton_clicked()
 {    this->hide();
 
-    sks_form->show();
+     sks_form->show();
 
 }
 
 void MainWindow::on_APCS_button_clicked()
 {
     this->hide();
-apcs_form->show();
- apcs_form->as = new apcs_system(ui->flight_type_text->toPlainText().toUInt(),
-                               ui->flight_number_text->toPlainText().toInt(),
-                               ui->cikl_number_text->toPlainText().toInt(),
-                               ui->segment_number_text->toPlainText().toUInt());
+    apcs_form->show();
+    apcs_form->as = new apcs_system(ui->flight_type_text->toPlainText().toUInt(),
+                                    ui->flight_number_text->toPlainText().toInt(),
+                                    ui->cikl_number_text->toPlainText().toInt(),
+                                    ui->segment_number_text->toPlainText().toUInt());
 }
 
 void MainWindow::on_measerement_system_button_clicked()
 {
     this->hide();
-
-measerement_form->show();
+    measerement_form->show();
 }
 
 void MainWindow::on_stabilization_system_button_clicked()
 {
     this->hide();
 
-stabilization_form->show();
+    stabilization_form->show();
 }
 
 void MainWindow::on_tenzometria_button_clicked()
@@ -69,17 +68,17 @@ void MainWindow::on_tenzometria_button_clicked()
 void MainWindow::on_dist_sys_button_clicked()
 {    this->hide();
 
-    dist_system_form->show();
+     dist_system_form->show();
 }
 
 void MainWindow::on_crack_sys_button_clicked()
 {    this->hide();
 
-    crack_form->show();
+     crack_form->show();
 }
 
 void MainWindow::on_acustic_sys_button_clicked()
 {    this->hide();
 
-    acustic_form->show();
+     acustic_form->show();
 }

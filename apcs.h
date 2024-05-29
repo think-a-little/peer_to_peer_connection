@@ -20,9 +20,8 @@
 #include "apcs_system.h"
 #define BROADCAST_ADDRESS "255.255.255.255"
 #define BROADCAST_PORT 37020
+#include "messagesendthread.h"
 
-class MessageReceiverThread;
-class MessageSendThread;
 
 namespace Ui {
 class apcs;
@@ -37,7 +36,6 @@ public:
     explicit apcs(QWidget *parent = nullptr);
     ~apcs();
     void con();
-
     void finish();
 
     void receive();
@@ -67,51 +65,6 @@ private:
 
     MessageReceiverThread* receiverThread=nullptr;
     MessageSendThread* senderThread=nullptr;
-};
-
-
-class MessageReceiverThread : public QThread
-{
-    Q_OBJECT
-
-public:
-    explicit MessageReceiverThread(QObject *parent = nullptr);
-
-protected:
-    void run() override;
-
-signals:
-    void messageReceived(const QString& message);
-
-private:
-    int sock;
-    sockaddr_in serverAddr;
-    sockaddr_in clientAddr;
-    socklen_t clientAddrLength;
-    char buffer[1000000];
-};
-
-
-class MessageSendThread : public QThread
-{
-    Q_OBJECT
-
-public:
-    explicit MessageSendThread(QObject *parent = nullptr);
-    char buffer[1024];
-    std::string message;
-protected:
-    void run() override;
-
-signals:
-    void messageSend();
-
-private:
-    int sock;
-    sockaddr_in serverAddr;
-    sockaddr_in clientAddr;
-    socklen_t clientAddrLength;
-
 };
 
 #endif // APCS_H
