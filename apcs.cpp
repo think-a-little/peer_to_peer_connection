@@ -62,6 +62,6 @@ void apcs::handleMessageSend()
 }
 void apcs::handleMessageReceived(const QString& message)
 {
-    ui->textEdit_3->insertPlainText(message);
+    ui->textEdit_3->insertPlainText(message+'\n');
 }
 

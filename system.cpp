@@ -10,33 +10,30 @@ void system::send_zero_type_message(){
 }
 void system::send_first_type_message(std::string msg){
     if (!senderThread)
-    senderThread=new MessageSendThread();
+        senderThread=new MessageSendThread();
     int i=0;
-    senderThread->buffer[i]=APCS;
+    senderThread->buffer[i]=source_code;
     i++;
     senderThread->buffer[i]=WARNING_MESSAGE;
     i++;
-    senderThread->buffer[i]=id_message;
+    senderThread->buffer[i]=std::to_string(id_message)[0];
     id_message++;
     i++;
     int j=0;
-
-    while (j!=msg.size()) {
-        senderThread->buffer[i]=msg[j];
-        j++;
-        i++;
-    }
-    j=0;
     ProtSRJ date_creator;
     std::vector<uint8_t> date=date_creator.create_date();
-    while (j!=sizeof (date)){
+    for (int j=0;j<date.size();j++){
         senderThread->buffer[i]=date[j];
         i++;
-        j++;
+    }
+
+    for (int j=0;j<msg.size();j++){
+        senderThread->buffer[i]=msg[j];
+        i++;
     }
     senderThread->buffer[i]=0;
-    senderThread->start();
     qDebug()<<senderThread->buffer;
+    senderThread->start();
 
 }
 
@@ -144,7 +141,7 @@ void system::parse_zero_type_message(ProtSRJ packet){
 void system::parse_first_type_message(ProtSRJ packet){
     write_log("Система получила сообщение типа 1");
     std::vector<char> data_for_third_message = {char(packet.packet_source),
-    char(packet.number_message[0]),char(packet.number_message[1])};
+                                                char(packet.number_message[0]),char(packet.number_message[1])};
     //Отправка сообщения третьего типа
 
 }
@@ -155,7 +152,7 @@ void system::parse_second_type_message(ProtSRJ packet){
     for (int i=0;i<data_source.size();i++)
         if (data_source[i]==source_code){
             std::vector<char> data_for_third_message={char(packet.packet_source),
-            char(packet.number_message[0]),char(packet.number_message[1])};
+                                                      char(packet.number_message[0]),char(packet.number_message[1])};
             //Отправка сообщения 3 типа
             break;
         }
@@ -163,7 +160,7 @@ void system::parse_second_type_message(ProtSRJ packet){
 }
 void system::parse_third_type_message(ProtSRJ packet){
     std::vector<uint8_t> data_number_message = {packet.message_data->get_data()[1],
-    packet.message_data->get_data()[2]};
+                                                packet.message_data->get_data()[2]};
     for (int i=0;i<stack_sent_messages.size();i++){
         if (data_number_message[0]== stack_sent_messages[i].packet.number_message[0]
                 && data_number_message[1]==stack_sent_messages[i].packet.number_message[1])

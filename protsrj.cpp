@@ -66,7 +66,7 @@ std::vector<uint8_t> ProtSRJ::create_date(){
     unsigned int milliseconds = static_cast<unsigned int>(duration.count()) / 1000;
     unsigned int roundedMilliseconds = milliseconds / 10;
     std::string milesecond = std::to_string(roundedMilliseconds);
-    date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+',';
+    date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+','+milesecond;
     std::vector<uint8_t> res(date.begin(),date.end());
     return res;
 }
