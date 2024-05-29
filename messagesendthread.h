@@ -16,8 +16,8 @@
 #include <condition_variable>
 #include <string>
 #include <unordered_map>
-#define BROADCAST_ADDRESS "255.255.255.255"
-#define BROADCAST_PORT 37020
+#define BROADCAST_ADDRESS "192.168.235.255"
+#define BROADCAST_PORT 21000
 
 class MessageSendThread : public QThread
 {
