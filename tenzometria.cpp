@@ -21,6 +21,9 @@ void tenzometria::on_firstTypeMesageBut_clicked()
         return;
     }
 
+        std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
+        tenz_sys=new tenzometria_system(LBORDER_SYSTEM_TENZOMETRIA);
+        tenz_sys->send_first_type_message(msg);
 }
 
 void tenzometria::on_secondTypeMesageBut_clicked()

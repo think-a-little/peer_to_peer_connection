@@ -15,6 +15,7 @@
 #include <string>
 #include <unordered_map>
 #include "messagesendthread.h"
+#include "srj_consts.h"
 class system
 {
 public:
