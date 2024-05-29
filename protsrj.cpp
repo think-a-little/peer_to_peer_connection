@@ -17,6 +17,7 @@ ProtSRJ ProtSRJ::ProtSRJ_create(uint8_t source){
     ProtSRJ res;
     res.packet_source=source;
     res.send_date_and_time=create_date();
+
 }
 std::vector<uint8_t> ProtSRJ::create_date(){
     std::string date;

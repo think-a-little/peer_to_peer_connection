@@ -18,8 +18,8 @@ public:
    void add_data(uint8_t message_type, std::vector<char> data);
    std::vector<char> get_char_date();
    void create_message_data(uint8_t message_type);
-private:
    std::vector<uint8_t> create_date();
+private:
 
 
 };

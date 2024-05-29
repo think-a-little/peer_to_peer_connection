@@ -26,10 +26,36 @@ void apcs::on_firstTypeMesageBut_clicked()
     }
     if (!senderThread) {
         senderThread = new MessageSendThread(this);
-        connect(senderThread, &MessageSendThread::messageSend, this, &apcs::handleMessageSend);
+
+        //        connect(senderThread, &MessageSendThread::messageSend, this, &apcs::handleMessageSend);
     }
-    senderThread->message =" APCS 1 " + ui->firstTypeMsgText->toPlainText().toStdString();
+    int i=0;
+    senderThread->buffer[i]=APCS;
+    i++;
+    senderThread->buffer[i]=WARNING_MESSAGE;
+    i++;
+    senderThread->buffer[i]=id_message;
+    id_message++;
+    i++;
+    int j=0;
+
+    std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
+    while (j!=msg.size()) {
+        senderThread->buffer[i]=msg[j];
+        j++;
+        i++;
+    }
+    j=0;
+    ProtSRJ date_creator;
+    std::vector<uint8_t> date=date_creator.create_date();
+    while (j!=sizeof (date)){
+        senderThread->buffer[i]=date[j];
+        i++;
+        j++;
+    }
+    senderThread->buffer[i]=0;
     senderThread->start();
+    qDebug()<<senderThread->buffer;
 }
 
 void apcs::on_secondTypeMesageBut_clicked()
@@ -87,7 +113,7 @@ void MessageReceiverThread::run()
     if (receivedBytes > 0) {
         buffer[receivedBytes]=0;
         emit messageReceived(QString::fromUtf8(buffer));
-
+        qDebug()<< buffer;
     }
 
     ::close(sock);
@@ -124,6 +150,9 @@ void MessageSendThread::run()
 
 
     emit messageSend();
+    //    for (int i=0;i<sizeof (buffer);i++)
+    message=buffer;
+    qDebug()<<buffer<< ' '<< QString::fromStdString(message);
     if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
         std::cerr << "Ошибка отправки сообщения" << std::endl;
         exit(EXIT_FAILURE);

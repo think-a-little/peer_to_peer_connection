@@ -20,12 +20,12 @@ void system::send_third_type_message(std::vector<char> data){
 void system::send_fourth_type_message(){
     qDebug()<<"0 type msg /n";
 }
-void system::send_first_type_message(std::vector<char> data){
+std::vector<uint8_t> system::send_first_type_message(std::vector<char> data){
     ProtSRJ packet, creator;
     packet = creator.ProtSRJ_create(source_code);
     packet.add_number_message(id_message);
     packet.add_data(WARNING_MESSAGE,data);
-
+    return packet.ToPacket();
 
 }
 system::system(uint8_t source_code,std::string log){

@@ -38,7 +38,7 @@ void MainWindow::on_APCS_button_clicked()
 {
     this->hide();
 apcs_form->show();
- apcs_system1 = new apcs_system(ui->flight_type_text->toPlainText().toUInt(),
+ apcs_form->as = new apcs_system(ui->flight_type_text->toPlainText().toUInt(),
                                ui->flight_number_text->toPlainText().toInt(),
                                ui->cikl_number_text->toPlainText().toInt(),
                                ui->segment_number_text->toPlainText().toUInt());
