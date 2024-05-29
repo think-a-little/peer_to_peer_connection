@@ -1,5 +1,11 @@
 #include "apcs_system.h"
 
+apcs_system::apcs_system(QObject *parent) :
+    system(parent)
+{
+
+}
+
 apcs_system::apcs_system(int flight_type, int flight_number, int cycle_number, int segment_number) : system(),
     flight_type(flight_type),
     flight_number(flight_number),

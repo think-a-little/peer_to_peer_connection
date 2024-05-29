@@ -9,13 +9,22 @@
 #include <iostream>
 #include <QDebug>
 #include <thread>
+#include <QThread>
 #include <mutex>
 #include <condition_variable>
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
-class system
+
+#define BROADCAST_ADDRESS "255.255.255.255"
+#define BROADCAST_PORT 21000
+
+class MessageReceiverThread;
+class MessageSendThread;
+
+class system : public QObject
 {
+    Q_OBJECT
 protected:
     const int port=21000;
     int sock;
@@ -28,6 +37,10 @@ protected:
     std::condition_variable cv;
     bool ready = false;
     std::string log;
+
+    MessageReceiverThread* receiverThread=nullptr;
+    MessageSendThread* senderThread=nullptr;
+
     struct sent_message{
         ProtSRJ packet;
     };
@@ -43,8 +56,18 @@ protected:
     void parse_third_type_message(ProtSRJ packet);
     void parse_fourth_type_message(ProtSRJ packet);
     void parse_fifth_type_message(ProtSRJ packet);
+
+private slots:
+    void button_clicked_send();
+
+    void button_clicked_receive();
+
+    void handleMessageReceived(const QString& message);
+
+    void handleMessageSend();
+
 public:
-    system();
+    explicit system(QObject *parent = nullptr);
     ~system();
 
     system(uint8_t source_code,std::string log);
@@ -54,13 +77,53 @@ public:
     virtual void send_third_type_message(std::vector<char> data);
     virtual void send_fifth_type_message();
     virtual void send_fourth_type_message();
-    void connect();
+    void connecting();
     virtual void receive()=0;
     virtual void send(std::string message)=0;
     void finish();
-    void setReady(bool status);
-    bool isReady();
-    void waiting();
+};
+
+class MessageReceiverThread : public QThread
+{
+    Q_OBJECT
+
+public:
+    explicit MessageReceiverThread(QObject *parent = nullptr);
+
+protected:
+    void run() override;
+
+signals:
+    void messageReceived(const QString& message);
+
+private:
+    int sock;
+    sockaddr_in serverAddr;
+    sockaddr_in clientAddr;
+    socklen_t clientAddrLength;
+    char buffer[1024];
+};
+
+
+class MessageSendThread : public QThread
+{
+    Q_OBJECT
+
+public:
+    explicit MessageSendThread(QObject *parent = nullptr);
+
+protected:
+    void run() override;
+
+signals:
+    void messageSend();
+
+private:
+    int sock;
+    sockaddr_in serverAddr;
+    sockaddr_in clientAddr;
+    socklen_t clientAddrLength;
+    char buffer[1024];
 };
 
 #endif // MODEL_H
