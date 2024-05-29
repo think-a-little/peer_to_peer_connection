@@ -17,7 +17,7 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
-//#include "tenzometria_system.h"
+#include "tenzometria_system.h"
 
 
 namespace Ui {
@@ -29,7 +29,7 @@ class tenzometria : public QMainWindow
     Q_OBJECT
 
 public:
-//    tenzometria_system* tenz_sys;
+    tenzometria_system* tenz_sys;
     explicit tenzometria(QWidget *parent = nullptr);
     ~tenzometria();
 

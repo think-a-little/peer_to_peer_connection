@@ -5,7 +5,7 @@
 class system_dist : public system
 {
 public:
-    system_dist();
+    system_dist(uint8_t source_code);
 };
 
 #endif // SYSTEM_DIST_H

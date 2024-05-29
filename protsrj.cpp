@@ -137,7 +137,7 @@ void ProtSRJ::create_message_data(uint8_t message_type){
 }
 void ProtSRJ::add_number_message(uint8_t num_message){
     std::string str_num = std::to_string(num_message);
-    std::vector<uint8_t>
+    std::vector<uint8_t> number_message;
     qDebug()<< "num \n";
     number_message.clear();
     qDebug()<< "clear \n";

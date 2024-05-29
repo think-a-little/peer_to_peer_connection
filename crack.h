@@ -18,6 +18,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "crack_system.h"
+
 #define BROADCAST_ADDRESS "255.255.255.255"
 #define BROADCAST_PORT 37020
 
@@ -55,6 +57,7 @@ private slots:
 
 private:
     Ui::crack *ui;
+    crack_system* cs;
     const int port=37020;
     int sock;
     sockaddr_in addr;

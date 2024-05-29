@@ -18,6 +18,8 @@
 #include <string>
 #include <unordered_map>
 
+#include "system_dist.h"
+
 #define BROADCAST_ADDRESS "255.255.255.255"
 #define BROADCAST_PORT 37020
 
@@ -49,6 +51,7 @@ private slots:
 
 private:
     Ui::dist_system *ui;
+    system_dist* sd;
     const int port=37020;
     int sock;
     sockaddr_in addr;
