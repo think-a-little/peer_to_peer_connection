@@ -63,7 +63,7 @@ private:
 
     std::mutex mtx;
     std::condition_variable cv;
-    bool receiveDo = false;
+    bool fifthTypeMsg = false;
 
     MessageReceiverThread* receiverThread=nullptr;
     MessageSendThread* senderThread=nullptr;
