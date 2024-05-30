@@ -18,7 +18,7 @@
 #include <string>
 #include <unordered_map>
 #include "tenzometria_system.h"
-
+#include "messagesendthread.h"
 
 namespace Ui {
 class tenzometria;

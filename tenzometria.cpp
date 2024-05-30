@@ -6,6 +6,12 @@ tenzometria::tenzometria(QWidget *parent) :
     ui(new Ui::tenzometria)
 {
     ui->setupUi(this);
+//    if (!receiverThread) {
+//        receiverThread = new MessageReceiverThread(this);
+//        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
+//    }
+//    receiverThread->start();
+
 }
 
 tenzometria::~tenzometria()
@@ -33,4 +39,7 @@ void tenzometria::on_secondTypeMesageBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
+    std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
+    tenz_sys=new tenzometria_system(LBORDER_SYSTEM_TENZOMETRIA);
+    tenz_sys->send_first_type_message(msg);
 }
