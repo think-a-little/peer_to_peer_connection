@@ -3,7 +3,7 @@
 
 #include "system.h"
 
-class apcs_system : system
+class apcs_system :public system
 {
 private:
     int flight_type;

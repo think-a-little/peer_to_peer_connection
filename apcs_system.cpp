@@ -5,17 +5,7 @@ apcs_system::apcs_system(int flight_type, int flight_number, int cycle_number, i
     flight_number(flight_number),
     cycle_number(cycle_number),
 segment_number(segment_number) {
-    auto lambda_receive = [this]() {
-                receive();
-            };
-    auto lambda_send = [this](std::string message) {
-                send(message);
-            };
-    std::thread receiverThread(lambda_receive);
-    std::thread senderThread(lambda_send, "message");
 
-    receiverThread.join();
-    senderThread.join();
 }
 
 void apcs_system::receive() {
