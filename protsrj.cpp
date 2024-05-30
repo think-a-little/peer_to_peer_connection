@@ -65,7 +65,13 @@ std::vector<uint8_t> ProtSRJ::create_date(){
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(now.time_since_epoch());
     unsigned int milliseconds = static_cast<unsigned int>(duration.count()) / 1000;
     unsigned int roundedMilliseconds = milliseconds / 10;
-    std::string milesecond = std::to_string(roundedMilliseconds);
+
+    std::ostringstream oss6;
+        oss6.fill('0');
+        oss6.width(2);
+    oss6 << std::to_string(roundedMilliseconds);
+    std::string milesecond = oss6.str();
+
     date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+','+milesecond;
     std::vector<uint8_t> res(date.begin(),date.end());
     return res;
@@ -91,7 +97,6 @@ ProtSRJ ProtSRJ::parse_packet(std::vector<uint8_t> packet){
     std::vector<uint8_t> data;
     data.assign(packet.begin(), packet.end());
     auto result_packet = ProtSRJ_create(source, date);
-    result_packet.number_message.assign(number[0], number[1]);
     result_packet.packet_message_type = type;
     result_packet.create_message_data(type);
     result_packet.message_data->add_data(data);

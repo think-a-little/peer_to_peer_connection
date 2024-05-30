@@ -38,16 +38,112 @@ void system::send_first_type_message(std::string msg){
 }
 
 void system::send_fifth_type_message(){
-    qDebug()<<"0 type msg /n";
+    if (!senderThread)
+        senderThread=new MessageSendThread();
+    int i=0;
+    senderThread->buffer[i]=source_code;
+    i++;
+    senderThread->buffer[i]=START_STATION_MESSAGE;
+    i++;
+    senderThread->buffer[i]=std::to_string(id_message)[0];
+    id_message++;
+    i++;
+    int j=0;
+    ProtSRJ date_creator;
+    std::vector<uint8_t> date=date_creator.create_date();
+    for (int j=0;j<date.size();j++){
+        senderThread->buffer[i]=date[j];
+        i++;
+    }
+
+//    for (int j=0;j<msg.size();j++){
+//        senderThread->buffer[i]=msg[j];
+//        i++;
+//    }
+    senderThread->buffer[i]=0;
+    qDebug()<<senderThread->buffer;
+    senderThread->start();
 }
-void system::send_second_type_message(std::vector<char> data){
-    qDebug()<<"0 type msg /n";
+void system::send_second_type_message(std::string msg){
+    if (!senderThread)
+        senderThread=new MessageSendThread();
+    int i=0;
+    senderThread->buffer[i]=source_code;
+    i++;
+    senderThread->buffer[i]=START_PROCESS_MESSAGE;
+    i++;
+    senderThread->buffer[i]=std::to_string(id_message)[0];
+    id_message++;
+    i++;
+    int j=0;
+    ProtSRJ date_creator;
+    std::vector<uint8_t> date=date_creator.create_date();
+    for (int j=0;j<date.size();j++){
+        senderThread->buffer[i]=date[j];
+        i++;
+    }
+
+    for (int j=0;j<msg.size();j++){
+        senderThread->buffer[i]=msg[j];
+        i++;
+    }
+    senderThread->buffer[i]=0;
+    qDebug()<<senderThread->buffer;
+    senderThread->start();
 }
-void system::send_third_type_message(std::vector<char> data){
-    qDebug()<<"0 type msg /n";
+void system::send_third_type_message(std::string msg){
+    if (!senderThread)
+        senderThread=new MessageSendThread();
+    int i=0;
+    senderThread->buffer[i]=source_code;
+    i++;
+    senderThread->buffer[i]=PROCESS_FINISH_MESSAGE;
+    i++;
+    senderThread->buffer[i]=std::to_string(id_message)[0];
+    id_message++;
+    i++;
+    int j=0;
+    ProtSRJ date_creator;
+    std::vector<uint8_t> date=date_creator.create_date();
+    for (int j=0;j<date.size();j++){
+        senderThread->buffer[i]=date[j];
+        i++;
+    }
+
+    for (int j=0;j<msg.size();j++){
+        senderThread->buffer[i]=msg[j];
+        i++;
+    }
+    senderThread->buffer[i]=0;
+    qDebug()<<senderThread->buffer;
+    senderThread->start();
 }
 void system::send_fourth_type_message(){
-    qDebug()<<"0 type msg /n";
+    if (!senderThread)
+        senderThread=new MessageSendThread();
+    int i=0;
+    senderThread->buffer[i]=source_code;
+    i++;
+    senderThread->buffer[i]=STOP_STATION_MESSAGE;
+    i++;
+    senderThread->buffer[i]=std::to_string(id_message)[0];
+    id_message++;
+    i++;
+    int j=0;
+    ProtSRJ date_creator;
+    std::vector<uint8_t> date=date_creator.create_date();
+    for (int j=0;j<date.size();j++){
+        senderThread->buffer[i]=date[j];
+        i++;
+    }
+
+//    for (int j=0;j<msg.size();j++){
+//        senderThread->buffer[i]=msg[j];
+//        i++;
+//    }
+    senderThread->buffer[i]=0;
+    qDebug()<<senderThread->buffer;
+    senderThread->start();
 }
 system::system(uint8_t source_code,std::string log){
     this->source_code=source_code;
