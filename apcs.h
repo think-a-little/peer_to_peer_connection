@@ -97,7 +97,8 @@ class MessageSendThread : public QThread
 
 public:
     explicit MessageSendThread(QObject *parent = nullptr);
-
+    char buffer[1024];
+    std::string message;
 protected:
     void run() override;
 
@@ -109,7 +110,7 @@ private:
     sockaddr_in serverAddr;
     sockaddr_in clientAddr;
     socklen_t clientAddrLength;
-    char buffer[1024];
+
 };
 
 #endif // APCS_H

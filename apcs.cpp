@@ -1,7 +1,7 @@
 #include "apcs.h"
 #include "ui_apcs.h"
 #include <regex>
-
+#include "srj_consts.h"
 apcs::apcs(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::apcs)
@@ -22,15 +22,16 @@ void apcs::finish() {
 
 void apcs::on_firstTypeMesageBut_clicked()
 {
-//    std::regex pattern("[0-6]{1,480}");
-//    if (!(std::regex_match(ui->firstTypeMsgText->toPlainText().toStdString(),pattern))){
-//        ui->firstTypeMsgText->setText("Ошибка");
-//        return;
-//    }
+    std::regex pattern("[0-6]{1,480}");
+    if (!(std::regex_match(ui->firstTypeMsgText->toPlainText().toStdString(),pattern))){
+        ui->firstTypeMsgText->setText("Ошибка");
+        return;
+    }
     if (!senderThread) {
             senderThread = new MessageSendThread(this);
             connect(senderThread, &MessageSendThread::messageSend, this, &apcs::handleMessageSend);
     }
+            senderThread->message =" APCS 1 " + ui->firstTypeMsgText->toPlainText().toStdString();
             senderThread->start();
 }
 
@@ -87,9 +88,9 @@ void MessageReceiverThread::run()
 
         receivedBytes = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr*)&clientAddr, &clientAddrLength);
         if (receivedBytes > 0) {
+            buffer[receivedBytes]=0;
             emit messageReceived(QString::fromUtf8(buffer));
-            for (int i = 0; i < 1024; i++)
-                buffer[i] = ' ';
+
 }
 
     ::close(sock);
@@ -131,7 +132,6 @@ void MessageSendThread::run()
     broadcastAddr.sin_port = htons(BROADCAST_PORT);
 
 
-    std::string message = "Hell";
     emit messageSend();
     if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
         std::cerr << "Ошибка отправки сообщения" << std::endl;
