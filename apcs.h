@@ -17,7 +17,7 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
-
+#include "apcs_system.h"
 #define BROADCAST_ADDRESS "255.255.255.255"
 #define BROADCAST_PORT 37020
 
@@ -34,7 +34,6 @@ class apcs : public QMainWindow
 public:
     explicit apcs(QWidget *parent = nullptr);
     ~apcs();
-
     void con();
 
     void finish();

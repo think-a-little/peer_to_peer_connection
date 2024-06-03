@@ -2,7 +2,7 @@
 #define APCS_SYSTEM_H
 
 #include "system.h"
-
+#include "srj_consts.h"
 class apcs_system :public system
 {
 private:
@@ -17,6 +17,8 @@ public:
     void receive() override;
     void send(std::string message) override;
     void func();
+    uint8_t source_code = APCS;
+    
 };
 
 #endif // APCS_H

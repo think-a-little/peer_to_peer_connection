@@ -16,9 +16,6 @@ apcs::~apcs()
     finish();
 }
 
-void apcs::finish() {
-    if(sock == 0) ::close(sock);
-}
 
 void apcs::on_firstTypeMesageBut_clicked()
 {
@@ -28,30 +25,30 @@ void apcs::on_firstTypeMesageBut_clicked()
         return;
     }
     if (!senderThread) {
-            senderThread = new MessageSendThread(this);
-            connect(senderThread, &MessageSendThread::messageSend, this, &apcs::handleMessageSend);
+        senderThread = new MessageSendThread(this);
+        connect(senderThread, &MessageSendThread::messageSend, this, &apcs::handleMessageSend);
     }
-            senderThread->message =" APCS 1 " + ui->firstTypeMsgText->toPlainText().toStdString();
-            senderThread->start();
+    senderThread->message =" APCS 1 " + ui->firstTypeMsgText->toPlainText().toStdString();
+    senderThread->start();
 }
 
 void apcs::on_secondTypeMesageBut_clicked()
 {
-//    std::regex pattern("[a-zA-Z0-5-/]{1,1}");
-//    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
-//        ui->secondTypeMsgText->setText("Ошибка");
-//        return;
-//    }
+    //    std::regex pattern("[a-zA-Z0-5-/]{1,1}");
+    //    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
+    //        ui->secondTypeMsgText->setText("Ошибка");
+    //        return;
+    //    }
     if (!receiverThread) {
-            receiverThread = new MessageReceiverThread(this);
-            connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
     }
-            receiverThread->start();
+    receiverThread->start();
 
 }
-
-
-
+void apcs::finish() {
+    if(sock == 0) ::close(sock);
+}
 
 MessageReceiverThread::MessageReceiverThread(QObject *parent)
     : QThread(parent)
@@ -80,31 +77,25 @@ void MessageReceiverThread::run()
 
     while (bind(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
         std::cerr << "Ошибка привязки сокета" << std::endl;
-//        exit(EXIT_FAILURE);
+        //        exit(EXIT_FAILURE);
     }
 
     socklen_t clientAddrLength = sizeof(clientAddr);
     ssize_t receivedBytes = 0;
 
-        receivedBytes = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr*)&clientAddr, &clientAddrLength);
-        if (receivedBytes > 0) {
-            buffer[receivedBytes]=0;
-            emit messageReceived(QString::fromUtf8(buffer));
+    receivedBytes = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr*)&clientAddr, &clientAddrLength);
+    if (receivedBytes > 0) {
+        buffer[receivedBytes]=0;
+        emit messageReceived(QString::fromUtf8(buffer));
 
-}
+    }
 
     ::close(sock);
 }
-
-
 void apcs::handleMessageReceived(const QString& message)
 {
     ui->textEdit_3->insertPlainText(message);
 }
-
-
-
-
 
 MessageSendThread::MessageSendThread(QObject *parent)
     : QThread(parent)
