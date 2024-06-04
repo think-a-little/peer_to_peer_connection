@@ -28,6 +28,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     measerement_for.cpp \
+    messagesendthread.cpp \
     protsrj.cpp \
     protsrjdata.cpp \
     secondtypemessage.cpp \
@@ -51,6 +52,7 @@ HEADERS += \
     fourthtypemessage.h \
     mainwindow.h \
     measerement_for.h \
+    messagesendthread.h \
     protsrj.h \
     protsrjdata.h \
     secondtypemessage.h \

@@ -14,16 +14,17 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
+#include "messagesendthread.h"
 class system
 {
-protected:
+public:
     const int port=21000;
     int sock;
     sockaddr_in addr;
     char buffer[1024];
     uint8_t source_code;
     bool is_recive=true;
-    short id_message;
+    short id_message=1;
     std::mutex mtx;
     std::condition_variable cv;
     bool ready = false;
@@ -46,17 +47,15 @@ protected:
 public:
     system();
     ~system();
-
+    MessageSendThread* senderThread = nullptr;
     system(uint8_t source_code,std::string log);
     virtual void send_zero_type_message();
-    virtual std::vector<uint8_t> send_first_type_message(std::vector<char> data);
+    virtual void send_first_type_message(std::string data);
     virtual void send_second_type_message(std::vector<char> data);
     virtual void send_third_type_message(std::vector<char> data);
-    virtual void send_fifth_type_message();
     virtual void send_fourth_type_message();
+    virtual void send_fifth_type_message();
     void connect();
-    virtual void receive()=0;
-    virtual void send(std::string message)=0;
     void finish();
     void setReady(bool status);
     bool isReady();
