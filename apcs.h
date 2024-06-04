@@ -32,6 +32,8 @@ class apcs : public QMainWindow
     Q_OBJECT
 
 public:
+    apcs_system* as;
+    uint8_t id_message=1;
     explicit apcs(QWidget *parent = nullptr);
     ~apcs();
     void con();
@@ -86,7 +88,7 @@ private:
     sockaddr_in serverAddr;
     sockaddr_in clientAddr;
     socklen_t clientAddrLength;
-    char buffer[1024];
+    char buffer[1000000];
 };
 
 
