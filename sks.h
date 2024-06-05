@@ -1,6 +1,6 @@
 #ifndef SKS_H
 #define SKS_H
-
+#include "sks_system.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -14,7 +14,7 @@ class sks : public QMainWindow
 public:
     explicit sks(QWidget *parent = nullptr);
     ~sks();
-
+    sks_system* sks_sender;
 private slots:
 
 

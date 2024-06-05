@@ -1,7 +1,7 @@
 #include "fourthtypemessage.h"
 #include <vector>
 #include<stdexcept>
-void FourthTypeMessage:: add_data(std::vector<char> data) {
+void FourthTypeMessage:: add_data(std::string data) {
     if (!data.empty()) {
               throw std::runtime_error("Data is not empty in fourth type message");
           }

@@ -22,7 +22,6 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    apcs_system *apcs_system1;
     apcs *apcs_form;
     stabilization *stabilization_form;
     measerement_for *measerement_form;

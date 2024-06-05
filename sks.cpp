@@ -19,6 +19,9 @@ void sks::on_firstTypeMsgBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
+    std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
+    sks_sender=new sks_system();
+    sks_sender->send_first_type_message(msg);
 }
 
 void sks::on_secondTypeMsgBut_clicked()

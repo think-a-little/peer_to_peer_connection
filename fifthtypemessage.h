@@ -4,7 +4,7 @@
 class FifthTypeMessage : public ProtSRJData
 {
 public:
-    void add_data(std::vector<char> data) override;
+    void add_data(std::string data) override;
     void add_data(std::vector<uint8_t> data) override;
     std::vector<char> parse_data() override;
 };

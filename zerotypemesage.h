@@ -5,7 +5,7 @@
 class ZeroTypeMesage : public ProtSRJData
 {
 public:
-    void add_data(std::vector<char> data) override;
+    void add_data(std::string data) override;
 };
 
 #endif // ZEROTYPEMESAGE_H

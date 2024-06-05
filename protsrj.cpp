@@ -12,6 +12,7 @@
 #include "fourthtypemessage.h"
 #include "fifthtypemessage.h"
 #include <sstream>
+#include <QDebug>
 SRJ_Consts checker;
 ProtSRJ ProtSRJ::ProtSRJ_create(uint8_t source){
     ProtSRJ res;
@@ -103,15 +104,20 @@ void ProtSRJ::create_message_data(uint8_t message_type){
         throw std::runtime_error("Message type is invalid");
     }
 }
-void ProtSRJ::add_number_message(short num_message){
+void ProtSRJ::add_number_message(uint8_t num_message){
     std::string str_num = std::to_string(num_message);
+    std::vector<uint8_t>
+    qDebug()<< "num \n";
     number_message.clear();
+    qDebug()<< "clear \n";
     number_message.resize(str_num.length());
+    qDebug()<< "resize \n";
     for (int i=0;i<str_num.length();i++){
         number_message[i]=str_num[i];
     }
+    qDebug()<< "done \n";
 }
-void ProtSRJ::add_data(uint8_t message_type, std::vector<char> data){
+void ProtSRJ::add_data(uint8_t message_type, std::string data){
     if (!data.empty() && data.size()>480)
         throw std::runtime_error("Data is too much");
     packet_message_type = message_type;
