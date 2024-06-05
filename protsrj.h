@@ -8,7 +8,7 @@ class ProtSRJ
 {
 public:
    uint8_t packet_source, packet_message_type;
-   std::vector<uint8_t> number_message;
+   uint8_t number_message[2];
    std::vector<uint8_t> send_date_and_time;
    ProtSRJData *message_data;
    ProtSRJ ProtSRJ_create(uint8_t source);

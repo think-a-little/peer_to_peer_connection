@@ -60,7 +60,8 @@ ProtSRJ ProtSRJ::parse_packet(std::vector<uint8_t> packet){
     std::vector<uint8_t> data;
     data.assign(packet.begin(), packet.end());
     auto result_packet = ProtSRJ_create(source, date);
-    result_packet.number_message.assign(number[0], number[1]);
+    result_packet.number_message[0]=number[0];
+    result_packet.number_message[1]= number[1];
     result_packet.packet_message_type = type;
     result_packet.create_message_data(type);
     result_packet.message_data->add_data(data);
@@ -105,17 +106,7 @@ void ProtSRJ::create_message_data(uint8_t message_type){
     }
 }
 void ProtSRJ::add_number_message(uint8_t num_message){
-    std::string str_num = std::to_string(num_message);
-    std::vector<uint8_t>
-    qDebug()<< "num \n";
-    number_message.clear();
-    qDebug()<< "clear \n";
-    number_message.resize(str_num.length());
-    qDebug()<< "resize \n";
-    for (int i=0;i<str_num.length();i++){
-        number_message[i]=str_num[i];
-    }
-    qDebug()<< "done \n";
+    number_message[0]=num_message;
 }
 void ProtSRJ::add_data(uint8_t message_type, std::string data){
     if (!data.empty() && data.size()>480)

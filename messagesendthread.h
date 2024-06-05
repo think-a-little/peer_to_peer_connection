@@ -59,7 +59,7 @@ private:
     sockaddr_in serverAddr;
     sockaddr_in clientAddr;
     socklen_t clientAddrLength;
-    char buffer[1000000];
+    char buffer[1024];
 };
 
 
