@@ -18,10 +18,7 @@
 #include <string>
 #include <unordered_map>
 #include "apcs_system.h"
-#define BROADCAST_ADDRESS "255.255.255.255"
-#define BROADCAST_PORT 37020
 #include "messagesendthread.h"
-
 
 namespace Ui {
 class apcs;
