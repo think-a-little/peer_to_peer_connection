@@ -41,7 +41,7 @@ void system::send_first_type_message(std::string msg){
 }
 
 void system::send_fifth_type_message(){
-    std::string msg=" ";
+    std::string msg="lol";
     qDebug()<<"5 type";
     send_message(msg,START_PROCESS_MESSAGE);
 }
@@ -52,7 +52,7 @@ void system::send_third_type_message(std::string msg){
     send_message(msg, PROCESS_FINISH_MESSAGE);
 }
 void system::send_fourth_type_message(){
-    std::string msg=" ";
+    std::string msg="lol";
     send_message(msg,STOP_STATION_MESSAGE);
 }
 system::system(uint8_t source_code,std::string log){
