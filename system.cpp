@@ -5,10 +5,7 @@
 system::system() {
     if (!senderThread)
         senderThread=new MessageSendThread();
-    senderThread->start();
-}
-void system::send_zero_type_message(std::string msg){
-    send_message(msg,INFORMATION_MESSAGE);
+
 }
 void system::send_message(std::string msg, uint8_t type){
     int i=0;
@@ -33,24 +30,36 @@ void system::send_message(std::string msg, uint8_t type){
         }
     }
     senderThread->buffer[i]=0;
+
 }
+void system::send_zero_type_message(std::string msg){
+    if (source_code==SCS)
+        senderThread->keep_sending=500;
+    send_message(msg,INFORMATION_MESSAGE);
+}
+
 void system::send_first_type_message(std::string msg){
+    senderThread->keep_sending=200;
     send_message(msg,WARNING_MESSAGE);
+
 }
 
 void system::send_fifth_type_message(){
-
+    senderThread->start();
     std::string msg=" ";
     qDebug()<<"5 type";
     send_message(msg,START_STATION_MESSAGE);
 }
 void system::send_second_type_message(std::string msg){
+    senderThread->start();
     send_message(msg, START_PROCESS_MESSAGE);
 }
 void system::send_third_type_message(std::string msg){
+    senderThread->start();
     send_message(msg, PROCESS_FINISH_MESSAGE);
 }
 void system::send_fourth_type_message(){
+    senderThread->start();
     std::string msg=" ";
     send_message(msg,STOP_STATION_MESSAGE);
 }
@@ -196,7 +205,11 @@ QString system::recieve(QString msg){
     QString answer;
     for (int i=23;i<msg.size();i++)
         answer=answer+msg[i];
-
+    if (msg[1]==PROCESS_FINISH_MESSAGE){
+        senderThread->keep_sending=0;
+        if (source_code==SCS)
+            send_zero_type_message("");
+    }
     if (msg[1]==WARNING_MESSAGE || msg[1]==START_PROCESS_MESSAGE){
         std::string answer2="";
         answer2=answer2+char(msg.toStdString()[0]);
