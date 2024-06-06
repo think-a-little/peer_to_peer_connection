@@ -7,6 +7,7 @@ apcs::apcs(QWidget *parent) :
     ui(new Ui::apcs)
 {
     ui->setupUi(this);
+
     if (!receiverThread) {
         receiverThread = new MessageReceiverThread(this);
         connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::updateTextEditSlot);

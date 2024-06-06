@@ -58,7 +58,7 @@ system::system(uint8_t source_code,std::string log){
     this->source_code=source_code;
     this->log=log;
     //происходит отправка 5 типа сообщения и начинается прием сообщений
-    qDebug() << contructor_message;
+    qDebug() << "constructor message " << contructor_message;
     //у разных классов будут раззный сообщения
 }
 

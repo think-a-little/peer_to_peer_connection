@@ -77,17 +77,31 @@ void MessageSendThread::run()
     emit messageSend();
     //    for (int i=0;i<sizeof (buffer);i++)
     message=buffer;
-    qDebug()<<buffer<< ' '<< QString::fromStdString(message);
-//    if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
-//        std::cerr << "Ошибка отправки сообщения" << std::endl;
-//        exit(EXIT_FAILURE);}
+    qDebug()<<buffer<<" 5 type "<< QString::fromStdString(message);
+    if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
+        std::cerr << "Ошибка отправки сообщения" << std::endl;
+        exit(EXIT_FAILURE);}
 //    if (buffer[1]==INFORMATION_MESSAGE)
     while (true){
+        if (buffer[1]==INFORMATION_MESSAGE) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
             std::cerr << "Ошибка отправки сообщения" << std::endl;
             exit(EXIT_FAILURE);
-        }}
+        }
+        else qDebug()<<" send zero ";
+        }
+        if (buffer[1]!=INFORMATION_MESSAGE ) {
+            if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
+                std::cerr << "Ошибка отправки сообщения" << std::endl;
+                exit(EXIT_FAILURE);
+            }
+            else {
+                qDebug()<<" send first ";
+                buffer[1]=INFORMATION_MESSAGE;
+            }
+        }
+    }
 
     ::close(sock);
 }

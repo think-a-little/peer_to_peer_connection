@@ -23,7 +23,8 @@ void sks::updateTextEditSlot(const QString& text){
     QString s= ui->textEdit_3->toPlainText();
     s=s+sks_sender->recieve( text);
     ui->textEdit_3->setText(s);
-    qDebug()<<text;
+//    ui->textEdit_3->insertPlainText(sks_sender->recieve(text));
+    qDebug()<<"textEdit_3 "<<text;
 }
 
 void sks::on_firstTypeMsgBut_clicked()

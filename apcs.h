@@ -46,7 +46,6 @@ public:
     void send(std::string message);
 private:
     Ui::apcs *ui;
-    const int port=37020;
     int sock;
     sockaddr_in addr;
     char buffer[1024];

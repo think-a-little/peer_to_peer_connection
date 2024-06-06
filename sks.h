@@ -46,7 +46,6 @@ private slots:
 
 private:
     Ui::sks *ui;
-    const int port=37020;
     int sock;
     sockaddr_in addr;
     char buffer[1024];
