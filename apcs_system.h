@@ -16,7 +16,6 @@ public:
     ~apcs_system();
     void func();
     QString recieve(QString msg) override;
-
 };
 
 #endif // APCS_H

@@ -76,11 +76,13 @@ void MessageSendThread::run()
     emit messageSend();
     while (true){
         message=buffer;
-        std::this_thread::sleep_for(std::chrono::milliseconds(500));
         if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
             std::cerr << "Ошибка отправки сообщения" << std::endl;
             exit(EXIT_FAILURE);
         }
+        if (buffer[1]==INFORMATION_MESSAGE)
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+
         qDebug()<<"Отправили" <<buffer;
     }
 
