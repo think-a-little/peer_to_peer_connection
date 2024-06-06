@@ -18,7 +18,6 @@
 #include <string>
 #include <unordered_map>
 #include "apcs_system.h"
-
 #include "messagesendthread.h"
 #include <QApplication>
 #include <QThread>
@@ -54,7 +53,7 @@ private:
 
     std::mutex mtx;
     std::condition_variable cv;
-    bool fifthTypeMsg = false;
+    bool receiveDo = false;
 
     MessageReceiverThread* receiverThread=nullptr;
     MessageSendThread* senderThread=nullptr;
