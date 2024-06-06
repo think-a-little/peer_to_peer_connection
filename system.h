@@ -20,10 +20,7 @@ class system
 {
 public:
     void sleep(int timer);
-    const int port=21000;
-    int sock;
-    sockaddr_in addr;
-    char buffer[1024];
+
     uint8_t source_code;
     bool is_recive=true;
     short id_message=1;
@@ -34,6 +31,7 @@ public:
     struct sent_message{
         ProtSRJ packet;
     };
+    void send_message(std::string msg, uint8_t type);
     QString contructor_message = "Система начала работу" ;
     void write_log(std::string text);
     void stop_working();
