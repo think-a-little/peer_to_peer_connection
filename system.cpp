@@ -8,13 +8,13 @@ system::system() {
 void system::send_zero_type_message(){
     qDebug()<<"0 type msg /n";
 }
-void system::send_first_type_message(std::string msg){
+void system::send_message(std::string msg, uint8_t type){
     if (!senderThread)
         senderThread=new MessageSendThread();
     int i=0;
     senderThread->buffer[i]=source_code;
     i++;
-    senderThread->buffer[i]=WARNING_MESSAGE;
+    senderThread->buffer[i]=type;
     i++;
     senderThread->buffer[i]=std::to_string(id_message)[0];
     id_message++;
@@ -26,124 +26,34 @@ void system::send_first_type_message(std::string msg){
         senderThread->buffer[i]=date[j];
         i++;
     }
-
-    for (int j=0;j<msg.size();j++){
-        senderThread->buffer[i]=msg[j];
-        i++;
+    if (msg!=" "){
+        for (int j=0;j<msg.size();j++){
+            senderThread->buffer[i]=msg[j];
+            i++;
+        }
     }
     senderThread->buffer[i]=0;
     qDebug()<<senderThread->buffer;
     senderThread->start();
-
+}
+void system::send_first_type_message(std::string msg){
+    send_message(msg,WARNING_MESSAGE);
 }
 
 void system::send_fifth_type_message(){
-    if (!senderThread)
-        senderThread=new MessageSendThread();
-    int i=0;
-    senderThread->buffer[i]=source_code;
-    i++;
-    senderThread->buffer[i]=START_STATION_MESSAGE;
-    i++;
-    senderThread->buffer[i]=std::to_string(id_message)[0];
-    id_message++;
-    i++;
-    int j=0;
-    ProtSRJ date_creator;
-    std::vector<uint8_t> date=date_creator.create_date();
-    for (int j=0;j<date.size();j++){
-        senderThread->buffer[i]=date[j];
-        i++;
-    }
-
-    //    for (int j=0;j<msg.size();j++){
-    //        senderThread->buffer[i]=msg[j];
-    //        i++;
-    //    }
-    senderThread->buffer[i]=0;
-    qDebug()<<senderThread->buffer;
-    senderThread->start();
+    std::string msg=" ";
+    qDebug()<<"5 type";
+    send_message(msg,START_PROCESS_MESSAGE);
 }
 void system::send_second_type_message(std::string msg){
-    if (!senderThread)
-        senderThread=new MessageSendThread();
-    int i=0;
-    senderThread->buffer[i]=source_code;
-    i++;
-    senderThread->buffer[i]=START_PROCESS_MESSAGE;
-    i++;
-    senderThread->buffer[i]=std::to_string(id_message)[0];
-    id_message++;
-    i++;
-    int j=0;
-    ProtSRJ date_creator;
-    std::vector<uint8_t> date=date_creator.create_date();
-    for (int j=0;j<date.size();j++){
-        senderThread->buffer[i]=date[j];
-        i++;
-    }
-
-    for (int j=0;j<msg.size();j++){
-        senderThread->buffer[i]=msg[j];
-        i++;
-    }
-    senderThread->buffer[i]=0;
-    qDebug()<<senderThread->buffer;
-    senderThread->start();
+    send_message(msg, START_PROCESS_MESSAGE);
 }
 void system::send_third_type_message(std::string msg){
-    if (!senderThread)
-    senderThread=new MessageSendThread();
-    int i=0;
-    senderThread->buffer[i]=source_code;
-    i++;
-    senderThread->buffer[i]=PROCESS_FINISH_MESSAGE;
-    i++;
-    senderThread->buffer[i]=std::to_string(id_message)[0];
-    id_message++;
-    i++;
-    int j=0;
-    ProtSRJ date_creator;
-    std::vector<uint8_t> date=date_creator.create_date();
-    for (int j=0;j<date.size();j++){
-        senderThread->buffer[i]=date[j];
-        i++;
-    }
-
-    for (int j=0;j<msg.size();j++){
-        senderThread->buffer[i]=msg[j];
-        i++;
-    }
-    senderThread->buffer[i]=0;
-    qDebug()<<senderThread->buffer;
-    senderThread->start();
+    send_message(msg, PROCESS_FINISH_MESSAGE);
 }
 void system::send_fourth_type_message(){
-    if (!senderThread)
-        senderThread=new MessageSendThread();
-    int i=0;
-    senderThread->buffer[i]=source_code;
-    i++;
-    senderThread->buffer[i]=STOP_STATION_MESSAGE;
-    i++;
-    senderThread->buffer[i]=std::to_string(id_message)[0];
-    id_message++;
-    i++;
-    int j=0;
-    ProtSRJ date_creator;
-    std::vector<uint8_t> date=date_creator.create_date();
-    for (int j=0;j<date.size();j++){
-        senderThread->buffer[i]=date[j];
-        i++;
-    }
-
-    //    for (int j=0;j<msg.size();j++){
-    //        senderThread->buffer[i]=msg[j];
-    //        i++;
-    //    }
-    senderThread->buffer[i]=0;
-    qDebug()<<senderThread->buffer;
-    senderThread->start();
+    std::string msg=" ";
+    send_message(msg,STOP_STATION_MESSAGE);
 }
 system::system(uint8_t source_code,std::string log){
     this->source_code=source_code;
@@ -257,22 +167,24 @@ QString system::recieve(QString msg){
     bool receiving=true;
     QString systemName;
     std::unordered_map<uint8_t,QString> codesOfSystems = {{APCS, "АСУ ТП"}, {SCS, "СКС"},
-{SYSTEM_MEASUREMENT_MOVEMENT, "Система измерения перемещения"},
-{SYSTEM_OF_STABILIZATION,"Система стабилизации"}, {LBORDER_SYSTEM_TENZOMETRIA, "Левая система тензометрии"},
-{RBORDER_SYSTEM_TENZOMETRIA,"Правая система тензометрии"},{LBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Левая подсистема дистанционного наблюдения"},
-{RBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Правая подсистема дистанционного наблюдения"},
-{LBORDER_SUBSYSTEM_REGISTER_CRACK,"Левая подсистема регистрации трещин"},
-{RBORDER_SUBSYSTEM_REGISTER_CRACK,"Правая подсистема регистрации трещин"},{LBORDER_ACUSTIC_SYSTEM,"Левая акустическая система"},
-{RBORDER_ACUSTIC_SYSTEM,"Правая акустическая система"}},
-codesOfMessages= {{INFORMATION_MESSAGE,"информациионное сообщение"},{WARNING_MESSAGE,"предупреждение"},
-{START_PROCESS_MESSAGE,"Сообщение о старте системы"},{PROCESS_FINISH_MESSAGE,"Сообщение о завершении"},
-{STOP_STATION_MESSAGE,"Сообщение о остановки станции"},
-{START_STATION_MESSAGE,"Сообщение о запуске станции"}};
+                                                          {SYSTEM_MEASUREMENT_MOVEMENT, "Система измерения перемещения"},
+                                                          {SYSTEM_OF_STABILIZATION,"Система стабилизации"}, {LBORDER_SYSTEM_TENZOMETRIA, "Левая система тензометрии"},
+                                                          {RBORDER_SYSTEM_TENZOMETRIA,"Правая система тензометрии"},{LBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Левая подсистема дистанционного наблюдения"},
+                                                          {RBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Правая подсистема дистанционного наблюдения"},
+                                                          {LBORDER_SUBSYSTEM_REGISTER_CRACK,"Левая подсистема регистрации трещин"},
+                                                          {RBORDER_SUBSYSTEM_REGISTER_CRACK,"Правая подсистема регистрации трещин"},{LBORDER_ACUSTIC_SYSTEM,"Левая акустическая система"},
+                                                          {RBORDER_ACUSTIC_SYSTEM,"Правая акустическая система"}},
+            codesOfMessages= {{INFORMATION_MESSAGE,"информациионное сообщение"},{WARNING_MESSAGE,"предупреждение"},
+                              {START_PROCESS_MESSAGE,"Сообщение о старте системы"},{PROCESS_FINISH_MESSAGE,"Подтверждение о получении сообщения"},
+                              {STOP_STATION_MESSAGE,"Сообщение о остановки станции"},
+                              {START_STATION_MESSAGE,"Сообщение о запуске станции"}};
     for (const auto& pair:codesOfSystems){
         if (source_code == pair.first)
             res=pair.second+res;
         if (msg[0] == pair.first)
             res=res+pair.second;
+        if (msg[0]==INFORMATION_MESSAGE)
+            send_third_type_message(msg.toStdString());
     }
     res=res+" получила ";
     for (const auto& pair:codesOfMessages){

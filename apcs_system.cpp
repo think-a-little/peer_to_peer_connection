@@ -6,6 +6,6 @@ apcs_system::apcs_system(int flight_type, int flight_number, int cycle_number, i
     cycle_number(cycle_number),
 segment_number(segment_number) {
     source_code=APCS;
-
+    send_fifth_type_message();
 }
 
