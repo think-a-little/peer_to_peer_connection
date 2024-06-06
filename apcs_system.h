@@ -15,6 +15,7 @@ public:
     apcs_system(int flight_type, int flight_number, int cycle_number, int segment_number); // первый параметр в шарпах почему-то строка
     ~apcs_system();
     void func();
+    QString recieve(QString msg) override;
 
 };
 

@@ -9,3 +9,8 @@ segment_number(segment_number) {
     send_fifth_type_message();
 }
 
+QString apcs_system::recieve(QString msg)
+{
+
+}
+

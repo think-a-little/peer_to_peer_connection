@@ -57,7 +57,7 @@ public:
     virtual void send_third_type_message(std::string msg);
     virtual void send_fourth_type_message();
     virtual void send_fifth_type_message();
-    QString recieve(QString msg);
+    virtual QString recieve(QString msg);
 };
 
 #endif // MODEL_H
