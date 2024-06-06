@@ -12,13 +12,6 @@ apcs::apcs(QWidget *parent) :
         connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::updateTextEditSlot);
     }
     receiverThread->start();
-//    if (!senderThread) {
-//        senderThread = new MessageSendThread(this);
-
-////                connect(senderThread, &MessageSendThread::messageSend, this, &apcs::updateTextEditSlot);
-//    }
-//    std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
-//    as->send_first_type_message(msg);
 }
 
 apcs::~apcs()
@@ -37,7 +30,10 @@ void apcs::on_firstTypeMesageBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
+    if (!senderThread) {
+        senderThread = new MessageSendThread(this);
 
+    }
     std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
     as->send_first_type_message(msg);
 
