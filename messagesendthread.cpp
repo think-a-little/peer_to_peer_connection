@@ -43,6 +43,7 @@ void MessageReceiverThread::run()
                 // нужно как-то выяснять какая система управляла потоком и приняла сообщение
             }
         }
+        qDebug()<<"Получили" << buffer;
     }
 
     ::close(sock);
@@ -72,40 +73,15 @@ void MessageSendThread::run()
     broadcastAddr.sin_family = AF_INET;
     broadcastAddr.sin_addr.s_addr = inet_addr(BROADCAST_ADDRESS);
     broadcastAddr.sin_port = htons(BROADCAST_PORT);
-
-
     emit messageSend();
-    //    for (int i=0;i<sizeof (buffer);i++)
-    message=buffer;
-    qDebug()<<buffer<<" 5 type "<< QString::fromStdString(message);
-    if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
-        std::cerr << "Ошибка отправки сообщения" << std::endl;
-        exit(EXIT_FAILURE);}
-    if (buffer[1]==INFORMATION_MESSAGE && buffer[0]==SCS)
     while (true){
-        if (buffer[1]==INFORMATION_MESSAGE) {
+        message=buffer;
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
         if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
             std::cerr << "Ошибка отправки сообщения" << std::endl;
             exit(EXIT_FAILURE);
         }
-        else qDebug()<<" send zero message";
-        }
-        if (buffer[1]!=INFORMATION_MESSAGE) {
-            buffer[0]=SCS;
-            if(buffer[1]==START_PROCESS_MESSAGE) {
-                // снятие показаний, скорее всего с базы данных
-                buffer[1]=PROCESS_FINISH_MESSAGE;
-            }
-            if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
-                std::cerr << "Ошибка отправки сообщения" << std::endl;
-                exit(EXIT_FAILURE);
-            }
-            else {
-                qDebug()<<" send other message ";
-                buffer[1]=INFORMATION_MESSAGE;
-            }
-        }
+        qDebug()<<"Отправили" <<buffer;
     }
 
     ::close(sock);
