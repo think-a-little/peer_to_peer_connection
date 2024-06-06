@@ -50,6 +50,7 @@ class MessageReceiverThread : public QThread
 public:
     explicit MessageReceiverThread(QObject *parent = nullptr);
     std::string message;
+    uint8_t source_code;
 protected:
     void run() override;
 

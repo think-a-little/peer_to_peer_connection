@@ -9,7 +9,7 @@ apcs::apcs(QWidget *parent) :
     ui->setupUi(this);
     if (!receiverThread) {
         receiverThread = new MessageReceiverThread(this);
-        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
+//        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
     }
     receiverThread->start();
 }
@@ -50,7 +50,7 @@ void apcs::on_secondTypeMesageBut_clicked()
     if (!receiverThread) {
         receiverThread = new MessageReceiverThread(this);
         receiverThread->source_code=as->source_code;
-        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
+//        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
     }
     receiverThread->start();
 
@@ -61,14 +61,14 @@ void apcs::finish() {
 
 
 
-void apcs::handleMessageSend()
-{
-    QByteArray ba = ui->firstTypeMsgText->toPlainText().toLatin1();
-    char* ch = ba.data();
-    for(int i=0; i<1024; i++) buffer[i]=ch[i];
-}
-void apcs::handleMessageReceived(const QString& message)
-{
-    ui->textEdit_3->insertPlainText(message+'\n');
-}
+//void apcs::handleMessageSend()
+//{
+//    QByteArray ba = ui->firstTypeMsgText->toPlainText().toLatin1();
+//    char* ch = ba.data();
+//    for(int i=0; i<1024; i++) buffer[i]=ch[i];
+//}
+//void apcs::handleMessageReceived(const QString& message)
+//{
+//    ui->textEdit_3->insertPlainText(message+'\n');
+//}
 
