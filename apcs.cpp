@@ -32,7 +32,6 @@ void apcs::on_firstTypeMesageBut_clicked()
     }
     if (!senderThread) {
         senderThread = new MessageSendThread(this);
-
     }
     std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
     as->send_first_type_message(msg);
