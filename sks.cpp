@@ -20,7 +20,7 @@ sks::~sks()
 }
 
 void sks::updateTextEditSlot(const QString& text){
-    ui->textEdit_3->setText(text);
+    ui->textEdit_3->setText(sks_sender->recieve( text));
 }
 
 void sks::on_firstTypeMsgBut_clicked()
@@ -30,10 +30,8 @@ void sks::on_firstTypeMsgBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
-    if (!senderThread) {
-        senderThread = new MessageSendThread(this);
-    }
-    std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
+
+    std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
     sks_sender->send_first_type_message(msg);
 
 }

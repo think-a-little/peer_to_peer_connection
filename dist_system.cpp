@@ -6,8 +6,15 @@ dist_system::dist_system(QWidget *parent) :
     ui(new Ui::dist_system)
 {
     ui->setupUi(this);
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &dist_system::updateTextEditSlot);
+    }
+    receiverThread->start();
 }
-
+void dist_system::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(sd->recieve( text));
+}
 dist_system::~dist_system()
 {
     delete ui;
@@ -31,5 +38,4 @@ void dist_system::on_secondTypeMesageBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
-    ui->textEdit_3->setText(QString::fromStdString(sd->recieve()));
 }

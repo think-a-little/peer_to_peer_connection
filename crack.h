@@ -30,7 +30,9 @@ public:
     explicit crack(QWidget *parent = nullptr);
     ~crack();
     crack_system* cs;
+    MessageReceiverThread* receiverThread=nullptr;
 private slots:
+    void updateTextEditSlot(const QString& text);
     void on_firstTypeMesageBut_clicked();
 
     void on_secondTypeMesageBut_clicked();

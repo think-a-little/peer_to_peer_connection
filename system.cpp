@@ -249,20 +249,14 @@ void system::sleep(int timer){
         if (time(NULL) - stime == timer) break;
     }
 }
-std::string system::recieve(){
-    if (!receiverThread) {
-        receiverThread = new MessageReceiverThread();
-    }
+QString system::recieve(QString msg){
+    if (source_code == msg[0])
+        return "  ";
     ProtSRJ packet;
-    std::string msg, res=" от ";
+    QString res=" от ";
     bool receiving=true;
-
-    if (!receiverThread->isRunning())
-        receiverThread->start();
-    msg=receiverThread->message;
-
-    std::string systemName;
-    std::unordered_map<uint8_t,std::string> codesOfSystems = {{APCS, "АСУ ТП"}, {SCS, "СКС"},
+    QString systemName;
+    std::unordered_map<uint8_t,QString> codesOfSystems = {{APCS, "АСУ ТП"}, {SCS, "СКС"},
 {SYSTEM_MEASUREMENT_MOVEMENT, "Система измерения перемещения"},
 {SYSTEM_OF_STABILIZATION,"Система стабилизации"}, {LBORDER_SYSTEM_TENZOMETRIA, "Левая система тензометрии"},
 {RBORDER_SYSTEM_TENZOMETRIA,"Правая система тензометрии"},{LBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Левая подсистема дистанционного наблюдения"},
@@ -289,7 +283,7 @@ codesOfMessages= {{INFORMATION_MESSAGE,"информациионное сооб�
     for (int i=3;i<23;i++)
         res=res+msg[i];
 
-    std::string answer;
+    QString answer;
     for (int i=23;i<msg.size();i++)
         answer=answer+msg[i];
     return res;

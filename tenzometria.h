@@ -33,23 +33,15 @@ public:
     explicit tenzometria(QWidget *parent = nullptr);
     ~tenzometria();
 
+    MessageReceiverThread* receiverThread=nullptr;
 private slots:
+    void updateTextEditSlot(const QString& text);
     void on_firstTypeMesageBut_clicked();
 
     void on_secondTypeMesageBut_clicked();
 
 private:
     Ui::tenzometria *ui;
-    const int port=37020;
-    int sock;
-    sockaddr_in addr;
-    char buffer[1024];
-
-    std::mutex mtx;
-    std::condition_variable cv;
-    bool receiveDo = false;
-
-
 };
 
 #endif // TENZOMETRIA_H

@@ -32,7 +32,7 @@ void MainWindow::on_sksButton_clicked()
 {
     sks_form = new sks(new QWidget());
     this->hide();
-
+    sks_form->sks_sender = new sks_system();
      sks_form->show();
      sks_form->sks_sender = new sks_system();
 }
@@ -68,7 +68,7 @@ void MainWindow::on_tenzometria_button_clicked()
 {
     tenzometria_form = new tenzometria(new QWidget());
     this->hide();
-    tenzometria_form->tenz_sys= new tenzometria_system(ui->code_tenz_text->toPlainText().toUInt());
+    tenzometria_form->tenz_sys= new tenzometria_system(LBORDER_SYSTEM_TENZOMETRIA);
     tenzometria_form->show();
 
 }
@@ -93,6 +93,6 @@ void MainWindow::on_acustic_sys_button_clicked()
 {
     acustic_form = new acustic(new QWidget());
     this->hide();
-     acustic_form->acustic_sys= new acustic_system(ui->code_AS_text->toPlainText().toInt());
+     acustic_form->acustic_sys= new acustic_system(LBORDER_ACUSTIC_SYSTEM);
       acustic_form->show();
 }

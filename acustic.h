@@ -35,7 +35,9 @@ public:
     ~acustic();
 
     acustic_system* acustic_sys;
+    MessageReceiverThread* receiverThread=nullptr;
 private slots:
+    void updateTextEditSlot(const QString& text);
     void on_firstTypeMesageBut_clicked();
 
     void on_secondTypeMesageBut_clicked();

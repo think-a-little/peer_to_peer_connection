@@ -27,7 +27,7 @@ apcs::~apcs()
     finish();
 }
 void apcs::updateTextEditSlot(const QString& text){
-    ui->textEdit_3->setText(text);
+    ui->textEdit_3->setText(as->recieve(text));
 }
 
 void apcs::on_firstTypeMesageBut_clicked()
@@ -37,11 +37,7 @@ void apcs::on_firstTypeMesageBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
-    if (!senderThread) {
-        senderThread = new MessageSendThread(this);
 
-        //        connect(senderThread, &MessageSendThread::messageSend, this, &apcs::handleMessageSend);
-    }
     std::string msg =ui->firstTypeMsgText->toPlainText().toStdString();
     as->send_first_type_message(msg);
 
@@ -49,17 +45,6 @@ void apcs::on_firstTypeMesageBut_clicked()
 
 void apcs::on_secondTypeMesageBut_clicked()
 {
-    //    std::regex pattern("[a-zA-Z0-5-/]{1,1}");
-    //    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
-    //        ui->secondTypeMsgText->setText("Ошибка");
-    //        return;
-    //    }
-    if (!receiverThread) {
-        receiverThread = new MessageReceiverThread(this);
-        receiverThread->source_code=as->source_code;
-//        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
-    }
-    receiverThread->start();
 
 }
 void apcs::finish() {
