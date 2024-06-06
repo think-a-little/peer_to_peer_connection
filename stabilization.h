@@ -19,6 +19,12 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
+#include "apcs_system.h"
+#include "messagesendthread.h"
+#include <QApplication>
+#include <QThread>
+#include <QTimer>
+#include <QTextStream>
 #include "stabilization_system.h"
 
 namespace Ui {
@@ -33,16 +39,28 @@ public:
     char buffer[1024];
     explicit stabilization(QWidget *parent = nullptr);
     ~stabilization();
+    void finish();
     stabilization_system* stab_sys;
 
 private slots:
+    void updateTextEditSlot(const QString& text);
+
     void on_firstTypeMesageBut_clicked();
 
     void on_secondTypeMesageBut_clicked();
 
 private:
     Ui::stabilization *ui;
-private slots:
+    const int port=37020;
+    int sock;
+    sockaddr_in addr;
+
+    std::mutex mtx;
+    std::condition_variable cv;
+    bool receiveDo = false;
+
+    MessageReceiverThread* receiverThread=nullptr;
+    MessageSendThread* senderThread=nullptr;
 
 };
 

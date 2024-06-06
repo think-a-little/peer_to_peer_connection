@@ -6,11 +6,21 @@ stabilization::stabilization(QWidget *parent) :
     ui(new Ui::stabilization)
 {
     ui->setupUi(this);
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &stabilization::updateTextEditSlot);
+    }
+    receiverThread->start();
 }
 
 stabilization::~stabilization()
 {
     delete ui;
+    finish();
+}
+
+void stabilization::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(text);
 }
 
 void stabilization::on_firstTypeMesageBut_clicked()
@@ -20,7 +30,11 @@ void stabilization::on_firstTypeMesageBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
-    stab_sys->send_first_type_message(ui->firstTypeMsgText->toPlainText().toStdString());
+    if (!senderThread) {
+        senderThread = new MessageSendThread(this);
+    }
+    std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
+    stab_sys->send_first_type_message(msg);
 }
 
 void stabilization::on_secondTypeMesageBut_clicked()
@@ -30,4 +44,8 @@ void stabilization::on_secondTypeMesageBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
+}
+
+void stabilization::finish() {
+    if(sock == 0) ::close(sock);
 }

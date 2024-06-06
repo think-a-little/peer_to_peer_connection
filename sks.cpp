@@ -6,12 +6,23 @@ sks::sks(QWidget *parent) :
     ui(new Ui::sks)
 {
     ui->setupUi(this);
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &sks::updateTextEditSlot);
+    }
+    receiverThread->start();
 }
 
 sks::~sks()
 {
     delete ui;
+    finish();
 }
+
+void sks::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(text);
+}
+
 void sks::on_firstTypeMsgBut_clicked()
 {
     std::regex pattern("[0-6]{1,480}");
@@ -19,9 +30,12 @@ void sks::on_firstTypeMsgBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
+    if (!senderThread) {
+        senderThread = new MessageSendThread(this);
+    }
     std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
-    sks_sender=new sks_system();
     sks_sender->send_first_type_message(msg);
+
 }
 
 void sks::on_secondTypeMsgBut_clicked()
@@ -32,3 +46,8 @@ void sks::on_secondTypeMsgBut_clicked()
         return;
     }
 }
+
+void sks::finish() {
+    if(sock == 0) ::close(sock);
+}
+

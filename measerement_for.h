@@ -17,7 +17,14 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
-#include <measerement_system.h>
+#include "apcs_system.h"
+#include "messagesendthread.h"
+#include <QApplication>
+#include <QThread>
+#include <QTimer>
+#include <QTextStream>
+
+#include "measerement_system.h"
 namespace Ui {
 class measerement_for;
 }
@@ -32,6 +39,7 @@ public:
     void finish();
 
 private slots:
+    void updateTextEditSlot(const QString& text);
 
     void on_firstTypeMesageBut_clicked();
 
@@ -39,6 +47,17 @@ private slots:
 
 private:
     Ui::measerement_for *ui;
+    const int port=37020;
+    int sock;
+    sockaddr_in addr;
+    char buffer[1024];
+
+    std::mutex mtx;
+    std::condition_variable cv;
+    bool receiveDo = false;
+
+    MessageReceiverThread* receiverThread=nullptr;
+    MessageSendThread* senderThread=nullptr;
 };
 
 

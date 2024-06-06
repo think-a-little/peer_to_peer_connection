@@ -6,11 +6,21 @@ measerement_for::measerement_for(QWidget *parent) :
     ui(new Ui::measerement_for)
 {
     ui->setupUi(this);
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &measerement_for::updateTextEditSlot);
+    }
+    receiverThread->start();
 }
 
 measerement_for::~measerement_for()
 {
     delete ui;
+    finish();
+}
+
+void measerement_for::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(text);
 }
 void measerement_for::on_firstTypeMesageBut_clicked()
 {
@@ -19,7 +29,11 @@ void measerement_for::on_firstTypeMesageBut_clicked()
         ui->firstTypeMsgText->setText("Ошибка");
         return;
     }
-    ms->send_first_type_message(ui->firstTypeMsgText->toPlainText().toStdString());
+    if (!senderThread) {
+        senderThread = new MessageSendThread(this);
+    }
+    std::string msg = ui->firstTypeMsgText->toPlainText().toStdString();
+    ms->send_first_type_message(msg);
 }
 
 void measerement_for::on_secondTypeMesageBut_clicked()
@@ -33,4 +47,6 @@ void measerement_for::on_secondTypeMesageBut_clicked()
 }
 
 
-
+void measerement_for::finish() {
+    if(sock == 0) ::close(sock);
+}
