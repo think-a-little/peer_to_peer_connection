@@ -1,5 +1,4 @@
 #include "messagesendthread.h"
-
 MessageReceiverThread::MessageReceiverThread(QObject *parent)
     : QThread(parent)
 {

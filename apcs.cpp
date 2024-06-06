@@ -19,7 +19,9 @@ apcs::~apcs()
     delete ui;
     finish();
 }
-
+void apcs::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(text);
+}
 
 void apcs::on_firstTypeMesageBut_clicked()
 {

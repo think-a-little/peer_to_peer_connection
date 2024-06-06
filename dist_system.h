@@ -20,11 +20,6 @@
 
 #include "system_dist.h"
 
-#define BROADCAST_ADDRESS "255.255.255.255"
-#define BROADCAST_PORT 37020
-
-class MessageReceiverThreadDIST;
-class MessageSendThreadDIST;
 
 namespace Ui {
 class dist_system;
@@ -37,78 +32,14 @@ class dist_system : public QWidget
 public:
     explicit dist_system(QWidget *parent = nullptr);
     ~dist_system();
-
-    void finish();
-
+    system_dist* sd;
 private slots:
-    void handleMessageReceived(const QString& message);
-
-    void handleMessageSend();
-
     void on_firstTypeMesageBut_clicked();
 
     void on_secondTypeMesageBut_clicked();
 
 private:
     Ui::dist_system *ui;
-    system_dist* sd;
-    const int port=37020;
-    int sock;
-    sockaddr_in addr;
-    char buffer[1024];
-
-    std::mutex mtx;
-    std::condition_variable cv;
-    bool receiveDo = false;
-
-    MessageReceiverThreadDIST* receiverThread=nullptr;
-    MessageSendThreadDIST* senderThread=nullptr;
-};
-
-
-
-class MessageReceiverThreadDIST : public QThread
-{
-    Q_OBJECT
-
-public:
-    explicit MessageReceiverThreadDIST(QObject *parent = nullptr);
-
-protected:
-    void run() override;
-
-signals:
-    void messageReceived(const QString& message);
-
-private:
-    int sock;
-    sockaddr_in serverAddr;
-    sockaddr_in clientAddr;
-    socklen_t clientAddrLength;
-    char buffer[1024];
-};
-
-
-class MessageSendThreadDIST : public QThread
-{
-    Q_OBJECT
-
-public:
-    explicit MessageSendThreadDIST(QObject *parent = nullptr);
-    char buffer[1024];
-    std::string message;
-protected:
-    void run() override;
-
-signals:
-    void messageSend();
-
-private:
-    int sock;
-    sockaddr_in serverAddr;
-    sockaddr_in clientAddr;
-    socklen_t clientAddrLength;
-
 };
 
 #endif // DIST_SYSTEM_H

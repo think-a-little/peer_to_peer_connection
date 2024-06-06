@@ -49,7 +49,7 @@ class MessageReceiverThread : public QThread
 
 public:
     explicit MessageReceiverThread(QObject *parent = nullptr);
-
+    std::string message;
 protected:
     void run() override;
 
