@@ -27,7 +27,7 @@ void MessageReceiverThread::run()
     serverAddr.sin_port = htons(BROADCAST_PORT);
 
     while (bind(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
-        std::cerr << "Ошибка привязки сокета" << std::endl;
+//        std::cerr << "Ошибка привязки сокета" << std::endl;
         exit(EXIT_FAILURE);
     }
 
@@ -81,7 +81,7 @@ void MessageSendThread::run()
     if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
         std::cerr << "Ошибка отправки сообщения" << std::endl;
         exit(EXIT_FAILURE);}
-//    if (buffer[1]==INFORMATION_MESSAGE)
+    if (buffer[1]==INFORMATION_MESSAGE && buffer[0]==SCS)
     while (true){
         if (buffer[1]==INFORMATION_MESSAGE) {
         std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -89,7 +89,7 @@ void MessageSendThread::run()
             std::cerr << "Ошибка отправки сообщения" << std::endl;
             exit(EXIT_FAILURE);
         }
-        else qDebug()<<" send zero ";
+        else qDebug()<<" send zero message";
         }
         if (buffer[1]!=INFORMATION_MESSAGE ) {
             if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
@@ -97,7 +97,7 @@ void MessageSendThread::run()
                 exit(EXIT_FAILURE);
             }
             else {
-                qDebug()<<" send first ";
+                qDebug()<<" send other message ";
                 buffer[1]=INFORMATION_MESSAGE;
             }
         }
