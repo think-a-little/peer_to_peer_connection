@@ -49,6 +49,7 @@ public:
     system();
     ~system();
     MessageSendThread* senderThread = nullptr;
+    MessageReceiverThread* receiverThread=nullptr;
     system(uint8_t source_code,std::string log);
     virtual void send_zero_type_message();
     virtual void send_first_type_message(std::string data);
@@ -56,11 +57,7 @@ public:
     virtual void send_third_type_message(std::string msg);
     virtual void send_fourth_type_message();
     virtual void send_fifth_type_message();
-    void connect();
-    void finish();
-    void setReady(bool status);
-    bool isReady();
-    void waiting();
+    std::string recieve();
 };
 
 #endif // MODEL_H

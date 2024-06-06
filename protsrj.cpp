@@ -72,7 +72,7 @@ std::vector<uint8_t> ProtSRJ::create_date(){
     oss6 << std::to_string(roundedMilliseconds);
     std::string milesecond = oss6.str();
 
-    date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+','+milesecond;
+    date=year+'/'+month+'/'+day+'-'+hour+':'+min+':'+sec+','+milesecond[milesecond.size()-2] +milesecond[milesecond.size()-1];
     std::vector<uint8_t> res(date.begin(),date.end());
     return res;
 }

@@ -6,7 +6,6 @@ MessageReceiverThread::MessageReceiverThread(QObject *parent)
 
 void MessageReceiverThread::run()
 {
-    qDebug()<<"HELLO";
     int sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (sock < 0) {
         std::cerr << "Ошибка создания сокета" << std::endl;
@@ -36,7 +35,7 @@ void MessageReceiverThread::run()
     if (receivedBytes > 0) {
         buffer[receivedBytes]=0;
         emit messageReceived(QString::fromUtf8(buffer));
-        qDebug()<< buffer;
+        message= buffer;
     }
 
     ::close(sock);

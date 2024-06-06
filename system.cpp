@@ -153,40 +153,8 @@ system::system(uint8_t source_code,std::string log){
     //у разных классов будут раззный сообщения
 }
 
-void system::connect() {
-    sock = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sock != 0) {
-        std::cerr << "Ошибка создания сокета" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-    addr.sin_family = AF_INET; // IPv4
-    addr.sin_port = htons(port); // Порт
-    addr.sin_addr.s_addr = INADDR_ANY; // Принимаемые все IP адреса
-    bind(sock, (struct sockaddr*)&addr, sizeof(addr));
-}
-
-void system::finish() {
-    if(sock == 0) close(sock);
-}
-
-void system::setReady(bool status) {
-    std::lock_guard<std::mutex> lock(mtx);
-    ready = status;
-    cv.notify_all();
-}
-
-bool system::isReady() {
-    std::lock_guard<std::mutex> lock(mtx);
-    return ready;
-}
-
-void system::waiting() {
-    std::unique_lock<std::mutex> lock(mtx); // Создаем unique_lock, который автоматически блокирует мьютекс
-    cv.wait(lock, [this]{return isReady();}); // Используем unique_lock в качестве аргумента для cv.wait()
-}
 
 system::~system() {
-    finish();
 }
 void system::write_log(std::string text){
     if (log.length()>0)
@@ -275,6 +243,63 @@ void system::parse_fourth_type_message(ProtSRJ packet){
 void system::parse_fifth_type_message(ProtSRJ packet){
     return;//она только у асу тп че то делает
 }
+std::string system::recieve(){
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread();
+    }
+    ProtSRJ packet;
+    std::string msg, res=" получила сообщение от ";
+    bool receiving=true;
+    while (receiving) {
+        if (!receiverThread->isRunning())
+            receiverThread->start();
+        msg=receiverThread->message;
+        if (source_code==msg[0])
+            continue;
+        else {
+            std::string systemName;
+            switch (source_code) {
+            case APCS:
+                res="АСУ ТП"+res;
+                break;
+            case SCS:
+                res="СКС"+res;
+                break;
+            case SYSTEM_MEASUREMENT_MOVEMENT:
+                res="АСУ ТП"+res;
+                break;
+            case SYSTEM_OF_STABILIZATION:
+                res="Система стабилизации"+res;
+                break;
+            case LBORDER_SYSTEM_TENZOMETRIA:
+                res="Левая система тензометрии"+res;
+                break;
+            case RBORDER_SYSTEM_TENZOMETRIA:
+                res="Правая система стабилизации"+res;
+                break;
+            case LBORDER_SUBSYSTEM_DIST_VIS_WATCH:
+                res="Левая подсистема дистанционного наблюдения"+res;
+                break;
+            case RBORDER_SUBSYSTEM_DIST_VIS_WATCH:
+                res="Правая подсистема дистанционного наблюдения"+res;
+                break;
+            case LBORDER_SUBSYSTEM_REGISTER_CRACK:
+                res="Левая подсистема регистрации трещин"+res;
+                break;
+            case RBORDER_SUBSYSTEM_REGISTER_CRACK:
+                res="Правая подсистема регистрации трещин"+res;
+                break;
+            case LBORDER_ACUSTIC_SYSTEM:
+                res="Левая акустическая система"+res;
+                break;
+            case RBORDER_ACUSTIC_SYSTEM:
+                res="Правая акустическая система"+res;
+                break;
+            }
+        }
+    }
 
+    return senderThread->message;
+}
 
 

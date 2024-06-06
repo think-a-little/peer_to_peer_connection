@@ -7,7 +7,6 @@ apcs::apcs(QWidget *parent) :
     ui(new Ui::apcs)
 {
     ui->setupUi(this);
-
 }
 
 apcs::~apcs()
@@ -15,7 +14,9 @@ apcs::~apcs()
     delete ui;
     finish();
 }
-
+void apcs::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(text);
+}
 
 void apcs::on_firstTypeMesageBut_clicked()
 {
@@ -41,11 +42,7 @@ void apcs::on_secondTypeMesageBut_clicked()
     //        ui->secondTypeMsgText->setText("Ошибка");
     //        return;
     //    }
-    if (!receiverThread) {
-        receiverThread = new MessageReceiverThread(this);
-        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
-    }
-    receiverThread->start();
+    ui->textEdit_3->setText(QString::fromStdString(as->recieve()));
 
 }
 void apcs::finish() {
@@ -54,14 +51,4 @@ void apcs::finish() {
 
 
 
-void apcs::handleMessageSend()
-{
-    QByteArray ba = ui->firstTypeMsgText->toPlainText().toLatin1();
-    char* ch = ba.data();
-    for(int i=0; i<1024; i++) buffer[i]=ch[i];
-}
-void apcs::handleMessageReceived(const QString& message)
-{
-    ui->textEdit_3->insertPlainText(message+'\n');
-}
 
