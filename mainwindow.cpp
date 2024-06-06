@@ -34,7 +34,7 @@ void MainWindow::on_sksButton_clicked()
     this->hide();
 
      sks_form->show();
-
+     sks_form->sks_sender = new sks_system();
 }
 
 void MainWindow::on_APCS_button_clicked()
