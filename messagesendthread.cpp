@@ -91,7 +91,12 @@ void MessageSendThread::run()
         }
         else qDebug()<<" send zero message";
         }
-        if (buffer[1]!=INFORMATION_MESSAGE ) {
+        if (buffer[1]!=INFORMATION_MESSAGE) {
+            buffer[0]=SCS;
+            if(buffer[1]==START_PROCESS_MESSAGE) {
+                // снятие показаний, скорее всего с базы данных
+                buffer[1]=PROCESS_FINISH_MESSAGE;
+            }
             if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
                 std::cerr << "Ошибка отправки сообщения" << std::endl;
                 exit(EXIT_FAILURE);

@@ -42,7 +42,7 @@ void system::send_fifth_type_message(){
 
     std::string msg=" ";
     qDebug()<<"5 type";
-    send_message(msg,START_PROCESS_MESSAGE);
+    send_message(msg,START_STATION_MESSAGE);
 }
 void system::send_second_type_message(std::string msg){
     send_message(msg, START_PROCESS_MESSAGE);
