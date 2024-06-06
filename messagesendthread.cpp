@@ -76,14 +76,14 @@ void MessageSendThread::run()
     //    for (int i=0;i<sizeof (buffer);i++)
     message=buffer;
     qDebug()<<buffer<< ' '<< QString::fromStdString(message);
-    while(true) {
+//    while(true) {
         sleep(1000);
     if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
         std::cerr << "Ошибка отправки сообщения" << std::endl;
         exit(EXIT_FAILURE);
     }
     qDebug()<<"mess";
-    }
+//    }
 
     ::close(sock);
 }
