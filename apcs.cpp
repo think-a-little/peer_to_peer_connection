@@ -7,7 +7,11 @@ apcs::apcs(QWidget *parent) :
     ui(new Ui::apcs)
 {
     ui->setupUi(this);
-
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
+    }
+    receiverThread->start();
 }
 
 apcs::~apcs()
@@ -43,6 +47,7 @@ void apcs::on_secondTypeMesageBut_clicked()
     //    }
     if (!receiverThread) {
         receiverThread = new MessageReceiverThread(this);
+        receiverThread->source_code=as->source_code;
         connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
     }
     receiverThread->start();
