@@ -43,7 +43,15 @@ void apcs::on_secondTypeMesageBut_clicked()
     //        ui->secondTypeMsgText->setText("Ошибка");
     //        return;
     //    }
+<<<<<<< HEAD
     ui->textEdit_3->setText(QString::fromStdString(as->recieve()));
+=======
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &apcs::handleMessageReceived);
+    }
+    receiverThread->start();
+>>>>>>> parent of be84197... start to write power of messages
 
 }
 void apcs::finish() {

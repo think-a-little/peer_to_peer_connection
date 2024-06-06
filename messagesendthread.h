@@ -16,8 +16,6 @@
 #include <condition_variable>
 #include <string>
 #include <unordered_map>
-#include "srj_consts.h"
-
 #define BROADCAST_ADDRESS "255.255.255.255"
 #define BROADCAST_PORT 21000
 

@@ -36,7 +36,11 @@ void MessageReceiverThread::run()
     if (receivedBytes > 0) {
         buffer[receivedBytes]=0;
         emit messageReceived(QString::fromUtf8(buffer));
+<<<<<<< HEAD
         message= buffer;
+=======
+        qDebug()<< buffer;
+>>>>>>> parent of be84197... start to write power of messages
     }
 
     ::close(sock);
