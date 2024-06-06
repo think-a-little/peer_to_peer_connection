@@ -1,5 +1,4 @@
 #include "messagesendthread.h"
-
 MessageReceiverThread::MessageReceiverThread(QObject *parent)
     : QThread(parent)
 {
@@ -27,21 +26,17 @@ void MessageReceiverThread::run()
 
     while (bind(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
         std::cerr << "Ошибка привязки сокета" << std::endl;
-                exit(EXIT_FAILURE);
+        //        exit(EXIT_FAILURE);
     }
 
     socklen_t clientAddrLength = sizeof(clientAddr);
     ssize_t receivedBytes = 0;
 
-    while(true) {
-        receivedBytes = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr*)&clientAddr, &clientAddrLength);
-        if (receivedBytes > 0) {
-            buffer[receivedBytes]=0;
-            emit messageReceived(QString::fromUtf8(buffer));
-            if(buffer[1]==START_STATION_MESSAGE && buffer[0]==APCS) {
-                // нужно как-то выяснять какая система управляла потоком и приняла сообщение
-            }
-        }
+    receivedBytes = recvfrom(sock, buffer, sizeof(buffer), 0, (struct sockaddr*)&clientAddr, &clientAddrLength);
+    if (receivedBytes > 0) {
+        buffer[receivedBytes]=0;
+        emit messageReceived(QString::fromUtf8(buffer));
+        message= buffer;
     }
 
     ::close(sock);

@@ -19,9 +19,14 @@
 #include <unordered_map>
 #include "apcs_system.h"
 #include "messagesendthread.h"
-
+#include <QApplication>
+#include <QThread>
+#include <QTimer>
+#include <QTextStream>
 
 namespace Ui {
+
+
 class apcs;
 }
 class apcs : public QMainWindow
@@ -39,17 +44,6 @@ public:
     void receive();
 
     void send(std::string message);
-
-private slots:
-
-    void handleMessageReceived(const QString& message);
-
-    void handleMessageSend();
-
-    void on_firstTypeMesageBut_clicked();
-
-    void on_secondTypeMesageBut_clicked();
-
 private:
     Ui::apcs *ui;
     const int port=37020;
@@ -63,6 +57,14 @@ private:
 
     MessageReceiverThread* receiverThread=nullptr;
     MessageSendThread* senderThread=nullptr;
+private slots:
+    void updateTextEditSlot(const QString& text) ;
+
+    void on_firstTypeMesageBut_clicked();
+
+    void on_secondTypeMesageBut_clicked();
+
+
 };
 
 #endif // APCS_H

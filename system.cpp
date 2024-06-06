@@ -56,10 +56,10 @@ void system::send_fifth_type_message(){
         i++;
     }
 
-//    for (int j=0;j<msg.size();j++){
-//        senderThread->buffer[i]=msg[j];
-//        i++;
-//    }
+    //    for (int j=0;j<msg.size();j++){
+    //        senderThread->buffer[i]=msg[j];
+    //        i++;
+    //    }
     senderThread->buffer[i]=0;
     qDebug()<<senderThread->buffer;
     senderThread->start();
@@ -93,7 +93,7 @@ void system::send_second_type_message(std::string msg){
 }
 void system::send_third_type_message(std::string msg){
     if (!senderThread)
-        senderThread=new MessageSendThread();
+    senderThread=new MessageSendThread();
     int i=0;
     senderThread->buffer[i]=source_code;
     i++;
@@ -137,10 +137,10 @@ void system::send_fourth_type_message(){
         i++;
     }
 
-//    for (int j=0;j<msg.size();j++){
-//        senderThread->buffer[i]=msg[j];
-//        i++;
-//    }
+    //    for (int j=0;j<msg.size();j++){
+    //        senderThread->buffer[i]=msg[j];
+    //        i++;
+    //    }
     senderThread->buffer[i]=0;
     qDebug()<<senderThread->buffer;
     senderThread->start();
@@ -153,40 +153,8 @@ system::system(uint8_t source_code,std::string log){
     //у разных классов будут раззный сообщения
 }
 
-void system::connect() {
-    sock = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sock != 0) {
-        std::cerr << "Ошибка создания сокета" << std::endl;
-        exit(EXIT_FAILURE);
-    }
-    addr.sin_family = AF_INET; // IPv4
-    addr.sin_port = htons(port); // Порт
-    addr.sin_addr.s_addr = INADDR_ANY; // Принимаемые все IP адреса
-    bind(sock, (struct sockaddr*)&addr, sizeof(addr));
-}
-
-void system::finish() {
-    if(sock == 0) close(sock);
-}
-
-void system::setReady(bool status) {
-    std::lock_guard<std::mutex> lock(mtx);
-    ready = status;
-    cv.notify_all();
-}
-
-bool system::isReady() {
-    std::lock_guard<std::mutex> lock(mtx);
-    return ready;
-}
-
-void system::waiting() {
-    std::unique_lock<std::mutex> lock(mtx); // Создаем unique_lock, который автоматически блокирует мьютекс
-    cv.wait(lock, [this]{return isReady();}); // Используем unique_lock в качестве аргумента для cv.wait()
-}
 
 system::~system() {
-    finish();
 }
 void system::write_log(std::string text){
     if (log.length()>0)
@@ -275,6 +243,56 @@ void system::parse_fourth_type_message(ProtSRJ packet){
 void system::parse_fifth_type_message(ProtSRJ packet){
     return;//она только у асу тп че то делает
 }
+void system::sleep(int timer){
+    int stime = time(NULL);
+    while (true) {
+        if (time(NULL) - stime == timer) break;
+    }
+}
+std::string system::recieve(){
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread();
+    }
+    ProtSRJ packet;
+    std::string msg, res=" от ";
+    bool receiving=true;
 
+    if (!receiverThread->isRunning())
+        receiverThread->start();
+    msg=receiverThread->message;
+
+    std::string systemName;
+    std::unordered_map<uint8_t,std::string> codesOfSystems = {{APCS, "АСУ ТП"}, {SCS, "СКС"},
+{SYSTEM_MEASUREMENT_MOVEMENT, "Система измерения перемещения"},
+{SYSTEM_OF_STABILIZATION,"Система стабилизации"}, {LBORDER_SYSTEM_TENZOMETRIA, "Левая система тензометрии"},
+{RBORDER_SYSTEM_TENZOMETRIA,"Правая система тензометрии"},{LBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Левая подсистема дистанционного наблюдения"},
+{RBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Правая подсистема дистанционного наблюдения"},
+{LBORDER_SUBSYSTEM_REGISTER_CRACK,"Левая подсистема регистрации трещин"},
+{RBORDER_SUBSYSTEM_REGISTER_CRACK,"Правая подсистема регистрации трещин"},{LBORDER_ACUSTIC_SYSTEM,"Левая акустическая система"},
+{RBORDER_ACUSTIC_SYSTEM,"Правая акустическая система"}},
+codesOfMessages= {{INFORMATION_MESSAGE,"информациионное сообщение"},{WARNING_MESSAGE,"предупреждение"},
+{START_PROCESS_MESSAGE,"Сообщение о старте системы"},{PROCESS_FINISH_MESSAGE,"Сообщение о завершении"},
+{STOP_STATION_MESSAGE,"Сообщение о остановки станции"},
+{START_STATION_MESSAGE,"Сообщение о запуске станции"}};
+    for (const auto& pair:codesOfSystems){
+        if (source_code == pair.first)
+            res=pair.second+res;
+        if (msg[0] == pair.first)
+            res=res+pair.second;
+    }
+    res=res+" получила ";
+    for (const auto& pair:codesOfMessages){
+        if (msg[1]==pair.first)
+            res=res+pair.second;
+    }
+    res = res + " в ";
+    for (int i=3;i<23;i++)
+        res=res+msg[i];
+
+    std::string answer;
+    for (int i=23;i<msg.size();i++)
+        answer=answer+msg[i];
+    return res;
+}
 
 
