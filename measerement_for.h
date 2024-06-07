@@ -36,8 +36,7 @@ public:
     explicit measerement_for(QWidget *parent = nullptr);
     ~measerement_for();
     measerement_system* ms;
-    void finish();
-
+    MessageReceiverThread* receiverThread=nullptr;
 private slots:
     void updateTextEditSlot(const QString& text);
 
@@ -47,17 +46,6 @@ private slots:
 
 private:
     Ui::measerement_for *ui;
-    const int port=37020;
-    int sock;
-    sockaddr_in addr;
-    char buffer[1024];
-
-    std::mutex mtx;
-    std::condition_variable cv;
-    bool receiveDo = false;
-
-    MessageReceiverThread* receiverThread=nullptr;
-    MessageSendThread* senderThread=nullptr;
 };
 
 

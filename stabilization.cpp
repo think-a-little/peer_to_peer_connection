@@ -20,7 +20,7 @@ stabilization::~stabilization()
 }
 
 void stabilization::updateTextEditSlot(const QString& text){
-    ui->textEdit_3->setText(text);
+    ui->textEdit_3->setText(stab_sys->recieve( text));
 }
 
 void stabilization::on_firstTypeMesageBut_clicked()

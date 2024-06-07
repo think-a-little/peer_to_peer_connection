@@ -7,8 +7,15 @@ acustic::acustic(QWidget *parent) :
     ui(new Ui::acustic)
 {
     ui->setupUi(this);
+    if (!receiverThread) {
+        receiverThread = new MessageReceiverThread(this);
+        connect(receiverThread, &MessageReceiverThread::messageReceived, this, &acustic::updateTextEditSlot);
+    }
+    receiverThread->start();
 }
-
+void acustic::updateTextEditSlot(const QString& text){
+    ui->textEdit_3->setText(acustic_sys->recieve( text));
+}
 acustic::~acustic()
 {
     delete ui;
@@ -27,11 +34,6 @@ void acustic::on_firstTypeMesageBut_clicked()
 
 void acustic::on_secondTypeMesageBut_clicked()
 {
-    std::regex pattern("[a-zA-Z0-5-/]{1,1}");
-    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
-        ui->secondTypeMsgText->setText("Ошибка");
-        return;
-    }
-    ui->textEdit_3->setText(QString::fromStdString(acustic_sys->recieve()));
+
 }
 
