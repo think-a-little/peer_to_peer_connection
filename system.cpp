@@ -56,10 +56,10 @@ void system::send_fifth_type_message(){
         i++;
     }
 
-//    for (int j=0;j<msg.size();j++){
-//        senderThread->buffer[i]=msg[j];
-//        i++;
-//    }
+    //    for (int j=0;j<msg.size();j++){
+    //        senderThread->buffer[i]=msg[j];
+    //        i++;
+    //    }
     senderThread->buffer[i]=0;
     qDebug()<<senderThread->buffer;
     senderThread->start();
@@ -93,7 +93,7 @@ void system::send_second_type_message(std::string msg){
 }
 void system::send_third_type_message(std::string msg){
     if (!senderThread)
-        senderThread=new MessageSendThread();
+    senderThread=new MessageSendThread();
     int i=0;
     senderThread->buffer[i]=source_code;
     i++;
@@ -137,10 +137,10 @@ void system::send_fourth_type_message(){
         i++;
     }
 
-//    for (int j=0;j<msg.size();j++){
-//        senderThread->buffer[i]=msg[j];
-//        i++;
-//    }
+    //    for (int j=0;j<msg.size();j++){
+    //        senderThread->buffer[i]=msg[j];
+    //        i++;
+    //    }
     senderThread->buffer[i]=0;
     qDebug()<<senderThread->buffer;
     senderThread->start();
@@ -243,63 +243,56 @@ void system::parse_fourth_type_message(ProtSRJ packet){
 void system::parse_fifth_type_message(ProtSRJ packet){
     return;//она только у асу тп че то делает
 }
+void system::sleep(int timer){
+    int stime = time(NULL);
+    while (true) {
+        if (time(NULL) - stime == timer) break;
+    }
+}
 std::string system::recieve(){
     if (!receiverThread) {
         receiverThread = new MessageReceiverThread();
     }
     ProtSRJ packet;
-    std::string msg, res=" получила сообщение от ";
+    std::string msg, res=" от ";
     bool receiving=true;
-    while (receiving) {
-        if (!receiverThread->isRunning())
-            receiverThread->start();
-        msg=receiverThread->message;
-        if (source_code==msg[0])
-            continue;
-        else {
-            std::string systemName;
-            switch (source_code) {
-            case APCS:
-                res="АСУ ТП"+res;
-                break;
-            case SCS:
-                res="СКС"+res;
-                break;
-            case SYSTEM_MEASUREMENT_MOVEMENT:
-                res="АСУ ТП"+res;
-                break;
-            case SYSTEM_OF_STABILIZATION:
-                res="Система стабилизации"+res;
-                break;
-            case LBORDER_SYSTEM_TENZOMETRIA:
-                res="Левая система тензометрии"+res;
-                break;
-            case RBORDER_SYSTEM_TENZOMETRIA:
-                res="Правая система стабилизации"+res;
-                break;
-            case LBORDER_SUBSYSTEM_DIST_VIS_WATCH:
-                res="Левая подсистема дистанционного наблюдения"+res;
-                break;
-            case RBORDER_SUBSYSTEM_DIST_VIS_WATCH:
-                res="Правая подсистема дистанционного наблюдения"+res;
-                break;
-            case LBORDER_SUBSYSTEM_REGISTER_CRACK:
-                res="Левая подсистема регистрации трещин"+res;
-                break;
-            case RBORDER_SUBSYSTEM_REGISTER_CRACK:
-                res="Правая подсистема регистрации трещин"+res;
-                break;
-            case LBORDER_ACUSTIC_SYSTEM:
-                res="Левая акустическая система"+res;
-                break;
-            case RBORDER_ACUSTIC_SYSTEM:
-                res="Правая акустическая система"+res;
-                break;
-            }
-        }
-    }
 
-    return senderThread->message;
+    if (!receiverThread->isRunning())
+        receiverThread->start();
+    msg=receiverThread->message;
+
+    std::string systemName;
+    std::unordered_map<uint8_t,std::string> codesOfSystems = {{APCS, "АСУ ТП"}, {SCS, "СКС"},
+{SYSTEM_MEASUREMENT_MOVEMENT, "Система измерения перемещения"},
+{SYSTEM_OF_STABILIZATION,"Система стабилизации"}, {LBORDER_SYSTEM_TENZOMETRIA, "Левая система тензометрии"},
+{RBORDER_SYSTEM_TENZOMETRIA,"Правая система тензометрии"},{LBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Левая подсистема дистанционного наблюдения"},
+{RBORDER_SUBSYSTEM_DIST_VIS_WATCH,"Правая подсистема дистанционного наблюдения"},
+{LBORDER_SUBSYSTEM_REGISTER_CRACK,"Левая подсистема регистрации трещин"},
+{RBORDER_SUBSYSTEM_REGISTER_CRACK,"Правая подсистема регистрации трещин"},{LBORDER_ACUSTIC_SYSTEM,"Левая акустическая система"},
+{RBORDER_ACUSTIC_SYSTEM,"Правая акустическая система"}},
+codesOfMessages= {{INFORMATION_MESSAGE,"информациионное сообщение"},{WARNING_MESSAGE,"предупреждение"},
+{START_PROCESS_MESSAGE,"Сообщение о старте системы"},{PROCESS_FINISH_MESSAGE,"Сообщение о завершении"},
+{STOP_STATION_MESSAGE,"Сообщение о остановки станции"},
+{START_STATION_MESSAGE,"Сообщение о запуске станции"}};
+    for (const auto& pair:codesOfSystems){
+        if (source_code == pair.first)
+            res=pair.second+res;
+        if (msg[0] == pair.first)
+            res=res+pair.second;
+    }
+    res=res+" получила ";
+    for (const auto& pair:codesOfMessages){
+        if (msg[1]==pair.first)
+            res=res+pair.second;
+    }
+    res = res + " в ";
+    for (int i=3;i<23;i++)
+        res=res+msg[i];
+
+    std::string answer;
+    for (int i=23;i<msg.size();i++)
+        answer=answer+msg[i];
+    return res;
 }
 
 

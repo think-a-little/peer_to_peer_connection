@@ -48,6 +48,7 @@ void MainWindow::on_APCS_button_clicked()
 void MainWindow::on_measerement_system_button_clicked()
 {
     this->hide();
+    measerement_form->ms = new measerement_system(SYSTEM_MEASUREMENT_MOVEMENT);
     measerement_form->show();
 }
 
@@ -61,25 +62,25 @@ void MainWindow::on_stabilization_system_button_clicked()
 void MainWindow::on_tenzometria_button_clicked()
 {
     this->hide();
-//    tenzometria_form->tenz_sys= new tenzometria_system(ui->code_tenz_text->toPlainText().toUInt());
+    tenzometria_form->tenz_sys= new tenzometria_system(ui->code_tenz_text->toPlainText().toUInt());
     tenzometria_form->show();
 
 }
 
 void MainWindow::on_dist_sys_button_clicked()
 {    this->hide();
-
+     dist_system_form->sd = new system_dist(LBORDER_SUBSYSTEM_DIST_VIS_WATCH);
      dist_system_form->show();
 }
 
 void MainWindow::on_crack_sys_button_clicked()
 {    this->hide();
-
+     crack_form->cs = new crack_system(LBORDER_SUBSYSTEM_REGISTER_CRACK);
      crack_form->show();
 }
 
 void MainWindow::on_acustic_sys_button_clicked()
 {    this->hide();
      acustic_form->acustic_sys= new acustic_system(ui->code_AS_text->toPlainText().toInt());
-     acustic_form->show();
+      acustic_form->show();
 }

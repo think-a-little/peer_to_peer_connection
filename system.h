@@ -19,6 +19,7 @@
 class system
 {
 public:
+    void sleep(int timer);
     const int port=21000;
     int sock;
     sockaddr_in addr;

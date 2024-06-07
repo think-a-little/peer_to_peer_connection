@@ -17,6 +17,7 @@
 #include "protsrj.h"
 #include <string>
 #include <unordered_map>
+#include <measerement_system.h>
 namespace Ui {
 class measerement_for;
 }
@@ -24,11 +25,10 @@ class measerement_for;
 class measerement_for : public QMainWindow
 {
     Q_OBJECT
-
 public:
     explicit measerement_for(QWidget *parent = nullptr);
     ~measerement_for();
-
+    measerement_system* ms;
     void finish();
 
 private slots:
@@ -39,15 +39,6 @@ private slots:
 
 private:
     Ui::measerement_for *ui;
-    int sock;
-    sockaddr_in addr;
-    char buffer[1024];
-
-    std::mutex mtx;
-    std::condition_variable cv;
-    bool receiveDo = false;
-
-
 };
 
 
