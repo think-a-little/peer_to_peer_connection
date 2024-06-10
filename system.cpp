@@ -183,8 +183,7 @@ QString system::recieve(QString msg){
             res=pair.second+res;
         if (msg[0] == pair.first)
             res=res+pair.second;
-        if (msg[0]==INFORMATION_MESSAGE)
-            send_third_type_message(msg.toStdString());
+
     }
     res=res+" получила ";
     for (const auto& pair:codesOfMessages){

@@ -21,6 +21,7 @@ sks::~sks()
 
 void sks::updateTextEditSlot(const QString& text){
     ui->textEdit_3->setText(sks_sender->recieve( text));
+    qDebug()<<text;
 }
 
 void sks::on_firstTypeMsgBut_clicked()

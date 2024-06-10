@@ -2,6 +2,6 @@
 #include "srj_consts.h"
 tenzometria_system::tenzometria_system(uint8_t x)
 {
-source_code= x;
+source_code= LBORDER_SYSTEM_TENZOMETRIA;
 send_fifth_type_message();
 }

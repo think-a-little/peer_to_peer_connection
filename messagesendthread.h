@@ -19,7 +19,7 @@
 #include "srj_consts.h"
 
 #define BROADCAST_ADDRESS "255.255.255.255"
-#define BROADCAST_PORT 21000
+#define BROADCAST_PORT 21200
 
 class MessageSendThread : public QThread
 {
