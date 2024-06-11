@@ -20,9 +20,11 @@ stabilization::~stabilization()
 }
 
 void stabilization::updateTextEditSlot(const QString& text){
-    QString s= ui->textEdit_3->toPlainText();
-    s=s+stab_sys->recieve( text);
-    ui->textEdit_3->setText(s);}
+//    QString s= ui->textEdit_3->toPlainText();
+//    s=s+stab_sys->recieve( text);
+//    ui->textEdit_3->setText(s);
+    ui->textEdit_3->insertPlainText(stab_sys->recieve(text));
+}
 
 void stabilization::on_firstTypeMesageBut_clicked()
 {
@@ -45,6 +47,7 @@ void stabilization::on_secondTypeMesageBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
+    stab_sys->send_second_type_message(ui->secondTypeMsgText->toPlainText().toStdString());
 }
 
 void stabilization::finish() {

@@ -20,11 +20,12 @@ sks::~sks()
 }
 
 void sks::updateTextEditSlot(const QString& text){
-    QString s= ui->textEdit_3->toPlainText();
-    s=s+sks_sender->recieve( text);
-    ui->textEdit_3->setText(s);
-//    ui->textEdit_3->insertPlainText(sks_sender->recieve(text));
-    qDebug()<<"textEdit_3 "<<text;
+//    QString s= ui->textEdit_3->toPlainText();
+//    s=s+sks_sender->recieve( text);
+//    ui->textEdit_3->setText(s);
+    ui->textEdit_3->insertPlainText(sks_sender->recieve(text));
+    sks_sender->send_zero_type_message();
+    qDebug()<<"вывели"<< text;
 }
 
 void sks::on_firstTypeMsgBut_clicked()
