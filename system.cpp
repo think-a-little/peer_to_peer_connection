@@ -3,14 +3,14 @@
 #include <qdebug.h>
 #include "srj_consts.h"
 system::system() {
-    //   connect();
-}
-void system::send_zero_type_message(){
-    qDebug()<<"0 type msg /n";
-}
-void system::send_message(std::string msg, uint8_t type){
     if (!senderThread)
         senderThread=new MessageSendThread();
+    senderThread->start();
+}
+void system::send_zero_type_message(){
+    send_message(" ",INFORMATION_MESSAGE);
+}
+void system::send_message(std::string msg, uint8_t type){
     int i=0;
     senderThread->buffer[i]=source_code;
     i++;
@@ -33,15 +33,14 @@ void system::send_message(std::string msg, uint8_t type){
         }
     }
     senderThread->buffer[i]=0;
-    qDebug()<<senderThread->buffer;
-    senderThread->start();
 }
 void system::send_first_type_message(std::string msg){
-    send_message(msg,WARNING_MESSAGE);
+        send_message(msg,WARNING_MESSAGE);
 }
 
 void system::send_fifth_type_message(){
-    std::string msg="lol";
+
+    std::string msg=" ";
     qDebug()<<"5 type";
     send_message(msg,START_PROCESS_MESSAGE);
 }
@@ -52,7 +51,7 @@ void system::send_third_type_message(std::string msg){
     send_message(msg, PROCESS_FINISH_MESSAGE);
 }
 void system::send_fourth_type_message(){
-    std::string msg="lol";
+    std::string msg=" ";
     send_message(msg,STOP_STATION_MESSAGE);
 }
 system::system(uint8_t source_code,std::string log){
@@ -193,7 +192,7 @@ QString system::recieve(QString msg){
     res = res + " в ";
     for (int i=3;i<23;i++)
         res=res+msg[i];
-
+    
     QString answer;
     for (int i=23;i<msg.size();i++)
         answer=answer+msg[i];

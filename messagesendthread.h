@@ -29,6 +29,7 @@ public:
     explicit MessageSendThread(QObject *parent = nullptr);
     char buffer[1024];
     std::string message;
+    void startSending();
 protected:
     void run() override;
 
@@ -42,6 +43,7 @@ private:
     socklen_t clientAddrLength;
 
 };
+
 
 class MessageReceiverThread : public QThread
 {

@@ -1,4 +1,6 @@
 #include "messagesendthread.h"
+#include <thread>
+#include"srj_consts.h"
 MessageReceiverThread::MessageReceiverThread(QObject *parent)
     : QThread(parent)
 {
@@ -26,7 +28,7 @@ void MessageReceiverThread::run()
 
     while (bind(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
         std::cerr << "Ошибка привязки сокета" << std::endl;
-                exit(EXIT_FAILURE);
+        exit(EXIT_FAILURE);
     }
 
     socklen_t clientAddrLength = sizeof(clientAddr);
@@ -76,10 +78,17 @@ void MessageSendThread::run()
     //    for (int i=0;i<sizeof (buffer);i++)
     message=buffer;
     qDebug()<<buffer<< ' '<< QString::fromStdString(message);
-    if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
-        std::cerr << "Ошибка отправки сообщения" << std::endl;
-        exit(EXIT_FAILURE);
-    }
+//    if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
+//        std::cerr << "Ошибка отправки сообщения" << std::endl;
+//        exit(EXIT_FAILURE);}
+//    if (buffer[1]==INFORMATION_MESSAGE)
+    while (true){
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));
+        if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
+            std::cerr << "Ошибка отправки сообщения" << std::endl;
+            exit(EXIT_FAILURE);
+        }}
 
     ::close(sock);
 }
+

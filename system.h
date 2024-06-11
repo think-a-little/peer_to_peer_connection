@@ -43,6 +43,7 @@ public:
     void parse_second_type_message(ProtSRJ packet);
     void parse_third_type_message(ProtSRJ packet);
     void parse_fourth_type_message(ProtSRJ packet);
+    bool receivedAnswer=false;
     void parse_fifth_type_message(ProtSRJ packet);
 public:
     system();
