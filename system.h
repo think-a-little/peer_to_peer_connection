@@ -51,13 +51,13 @@ public:
     MessageSendThread* senderThread = nullptr;
     MessageReceiverThread* receiverThread=nullptr;
     system(uint8_t source_code,std::string log);
-    virtual void send_zero_type_message();
+    virtual void send_zero_type_message(std::string msg);
     virtual void send_first_type_message(std::string data);
     virtual void send_second_type_message(std::string msg);
     virtual void send_third_type_message(std::string msg);
     virtual void send_fourth_type_message();
     virtual void send_fifth_type_message();
-    QString recieve(QString msg);
+    virtual QString recieve(QString msg);
 };
 
 #endif // MODEL_H

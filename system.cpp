@@ -7,8 +7,8 @@ system::system() {
         senderThread=new MessageSendThread();
     senderThread->start();
 }
-void system::send_zero_type_message(){
-    send_message(" ",INFORMATION_MESSAGE);
+void system::send_zero_type_message(std::string msg){
+    send_message(msg,INFORMATION_MESSAGE);
 }
 void system::send_message(std::string msg, uint8_t type){
     int i=0;
@@ -35,7 +35,7 @@ void system::send_message(std::string msg, uint8_t type){
     senderThread->buffer[i]=0;
 }
 void system::send_first_type_message(std::string msg){
-        send_message(msg,WARNING_MESSAGE);
+    send_message(msg,WARNING_MESSAGE);
 }
 
 void system::send_fifth_type_message(){
@@ -196,7 +196,13 @@ QString system::recieve(QString msg){
     QString answer;
     for (int i=23;i<msg.size();i++)
         answer=answer+msg[i];
-    return res;
-}
+
+    if (msg[1]==WARNING_MESSAGE || msg[1]==START_PROCESS_MESSAGE){
+        std::string answer2="";
+        answer2=answer2+char(msg.toStdString()[0]);
+        answer2=answer2+char(msg.toStdString()[2]);
+        send_third_type_message(answer2);}
+                return res;
+ }
 
 
