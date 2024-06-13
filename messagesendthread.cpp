@@ -83,6 +83,7 @@ void MessageSendThread::run()
         if (buffer[1]==INFORMATION_MESSAGE || buffer[1]==WARNING_MESSAGE)
             std::this_thread::sleep_for(std::chrono::milliseconds(keep_sending));
         qDebug()<<"Отправили" <<buffer << " " << keep_sending;
+        if(buffer[1]==STOP_STATION_MESSAGE) break;
         emit messageSend();
     }while (keep_sending!=0);
     ::close(sock);

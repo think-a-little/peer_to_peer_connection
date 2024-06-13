@@ -53,3 +53,12 @@ void stabilization::on_secondTypeMesageBut_clicked()
 void stabilization::finish() {
     if(sock == 0) ::close(sock);
 }
+
+void stabilization::closeEvent(QCloseEvent *event)
+{
+    stab_sys->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    if(stab_sys) delete stab_sys;
+    qDebug()<<"окно закрывается";
+    QWidget::closeEvent(event);
+}

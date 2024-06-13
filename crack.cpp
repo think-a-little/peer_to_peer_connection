@@ -34,3 +34,12 @@ void crack::on_secondTypeMesageBut_clicked()
 {
 
 }
+
+void crack::closeEvent(QCloseEvent *event)
+{
+    cs->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    if(cs) delete cs;
+    qDebug()<<"окно закрывается";
+    QWidget::closeEvent(event);
+}

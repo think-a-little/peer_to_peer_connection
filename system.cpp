@@ -50,21 +50,26 @@ void system::send_first_type_message(std::string msg){
 void system::send_fifth_type_message(){
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
     senderThread->start();
+    senderThread->keep_sending=0;
     std::string msg="";
     send_message(msg,START_PROCESS_MESSAGE);
 }
 void system::send_second_type_message(std::string msg){
     senderThread->start();
+    senderThread->keep_sending=0;
     send_message(msg, START_PROCESS_MESSAGE);
 }
 void system::send_third_type_message(std::string msg){
     senderThread->start();
+    senderThread->keep_sending=0;
     send_message(msg, PROCESS_FINISH_MESSAGE);
 }
 void system::send_fourth_type_message(){
-    senderThread->start();
     std::string msg=" ";
+    senderThread->keep_sending=0;
     send_message(msg,STOP_STATION_MESSAGE);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    senderThread->start();
 }
 system::system(uint8_t source_code,std::string log){
     this->source_code=source_code;

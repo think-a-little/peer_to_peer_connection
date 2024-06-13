@@ -44,6 +44,8 @@ public:
     void receive();
 
     void send(std::string message);
+
+    void closeEvent(QCloseEvent* event) override;
 private:
     Ui::apcs *ui;
     int sock;

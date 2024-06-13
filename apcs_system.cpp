@@ -8,6 +8,11 @@ segment_number(segment_number) {
     source_code=APCS;
     send_fifth_type_message();
 }
+
+apcs_system::~apcs_system()
+{
+
+}
 QString apcs_system::recieve(QString msg){
     if (source_code == msg[0])
         return "  ";

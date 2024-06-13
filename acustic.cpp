@@ -37,3 +37,12 @@ void acustic::on_secondTypeMesageBut_clicked()
 
 }
 
+void acustic::closeEvent(QCloseEvent *event)
+{
+    acustic_sys->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    if(acustic_sys) delete acustic_sys;
+    qDebug()<<"окно закрывается";
+    QWidget::closeEvent(event);
+}
+

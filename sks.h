@@ -37,12 +37,15 @@ public:
     ~sks();
     void finish();
     sks_system* sks_sender;
+    void closeEvent(QCloseEvent *event);
 private slots:
     void updateTextEditSlot(const QString& text);
 
     void on_firstTypeMsgBut_clicked();
 
     void on_secondTypeMsgBut_clicked();
+
+    void on_pushButton_4_clicked();
 
 private:
     Ui::sks *ui;

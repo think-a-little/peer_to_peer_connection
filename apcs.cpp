@@ -7,6 +7,7 @@ apcs::apcs(QWidget *parent) :
     ui(new Ui::apcs)
 {
     ui->setupUi(this);
+    setAttribute(Qt::WA_DeleteOnClose);
 
     if (!receiverThread) {
         receiverThread = new MessageReceiverThread(this);
@@ -49,6 +50,17 @@ void apcs::on_secondTypeMesageBut_clicked()
 void apcs::finish() {
     if(sock == 0) ::close(sock);
 }
+
+void apcs::closeEvent(QCloseEvent *event)
+{
+    as->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    if(as) delete as;
+    qDebug()<<"окно закрывается";
+    QWidget::closeEvent(event);
+}
+
+
 
 
 

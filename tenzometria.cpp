@@ -43,3 +43,13 @@ void tenzometria::on_secondTypeMesageBut_clicked()
     }
 
 }
+
+void tenzometria::closeEvent(QCloseEvent *event)
+{
+    tenz_sys->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    if(tenz_sys) delete tenz_sys;
+    qDebug()<<"окно закрывается";
+    QWidget::closeEvent(event);
+}
+

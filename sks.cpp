@@ -57,3 +57,18 @@ void sks::finish() {
     if(sock == 0) ::close(sock);
 }
 
+void sks::closeEvent(QCloseEvent *event)
+{
+    sks_sender->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    if(sks_sender) delete sks_sender;
+    qDebug()<<"окно закрывается";
+    QWidget::closeEvent(event);
+}
+
+void sks::on_pushButton_4_clicked()
+{
+    sks_sender->send_fourth_type_message();
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+    qDebug()<<"окно останавливается";
+}
