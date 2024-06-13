@@ -46,6 +46,8 @@ public:
     void send(std::string message);
 
     void closeEvent(QCloseEvent* event) override;
+
+    bool console_mode;
 private:
     Ui::apcs *ui;
     int sock;

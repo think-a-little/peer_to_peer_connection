@@ -12,6 +12,8 @@
 #include "tenzometria.h"
 #include "apcs_system.h"
 #include "distant.h"
+#include "consolereader.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -32,6 +34,7 @@ public:
     crack *crack_form;
     dist_system *dist_system_form;
     tenzometria *tenzometria_form;
+    bool console_mode;
 
 private slots:
 

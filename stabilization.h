@@ -43,6 +43,8 @@ public:
     stabilization_system* stab_sys;
 
     void closeEvent(QCloseEvent *event);
+
+    bool console_mode;
 private slots:
     void updateTextEditSlot(const QString& text);
 

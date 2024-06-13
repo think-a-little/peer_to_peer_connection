@@ -21,6 +21,7 @@ SOURCES += \
     SRJ_Consts.cpp \
     acustic.cpp \
     apcs.cpp \
+    consolereader.cpp \
     crack.cpp \
     crack_system.cpp \
     dist_system.cpp \
@@ -53,6 +54,7 @@ HEADERS += \
     apcs_system.h \
     acustic.h \
     apcs.h \
+    consolereader.h \
     crack.h \
     crack_system.h \
     dist_system.h \

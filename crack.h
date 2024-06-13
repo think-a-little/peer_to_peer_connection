@@ -32,6 +32,8 @@ public:
     crack_system* cs;
     MessageReceiverThread* receiverThread=nullptr;
     void closeEvent(QCloseEvent *event);
+
+    bool console_mode;
 private slots:
     void updateTextEditSlot(const QString& text);
     void on_firstTypeMesageBut_clicked();

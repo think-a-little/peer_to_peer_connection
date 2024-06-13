@@ -38,6 +38,8 @@ public:
     measerement_system* ms;
     MessageReceiverThread* receiverThread=nullptr;
     void closeEvent(QCloseEvent *event);
+
+    bool console_mode;
 private slots:
     void updateTextEditSlot(const QString& text);
 

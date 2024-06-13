@@ -38,6 +38,8 @@ public:
     void finish();
     sks_system* sks_sender;
     void closeEvent(QCloseEvent *event);
+
+    bool console_mode;
 private slots:
     void updateTextEditSlot(const QString& text);
 

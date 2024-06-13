@@ -33,6 +33,8 @@ public:
     ~distant();
     system_dist* sd;
     MessageReceiverThread* receiverThread=nullptr;
+
+    bool console_mode;
 private slots:
     void updateTextEditSlot(const QString& text);
     void on_firstTypeMesageBut_clicked();
