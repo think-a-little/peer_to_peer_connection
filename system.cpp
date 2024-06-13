@@ -40,7 +40,6 @@ void system::send_zero_type_message(std::string msg){
 
 void system::send_first_type_message(std::string msg){
     senderThread->keep_sending=200;
-
     send_message(msg,WARNING_MESSAGE);
 
 }

@@ -27,7 +27,7 @@ void MessageReceiverThread::run()
     serverAddr.sin_port = htons(BROADCAST_PORT);
 
     while (bind(sock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) < 0) {
-//        std::cerr << "Ошибка привязки сокета" << std::endl;
+        //        std::cerr << "Ошибка привязки сокета" << std::endl;
         exit(EXIT_FAILURE);
     }
 
@@ -81,8 +81,7 @@ void MessageSendThread::run()
             exit(EXIT_FAILURE);
         }
         if (buffer[1]==INFORMATION_MESSAGE || buffer[1]==WARNING_MESSAGE)
-        std::this_thread::sleep_for(std::chrono::milliseconds(keep_sending));
-
+            std::this_thread::sleep_for(std::chrono::milliseconds(keep_sending));
         qDebug()<<"Отправили" <<buffer << " " << keep_sending;
     }while (keep_sending!=0);
     ::close(sock);
