@@ -21,10 +21,13 @@ apcs::~apcs()
     finish();
 }
 void apcs::updateTextEditSlot(const QString& text){
-    ui->textEdit_3->insertPlainText(as->recieve(text));
-    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+//    ui->textEdit_3->setText(as->recieve(text));
+    QString s= ui->textEdit_3->toPlainText();
+    s=s+as->recieve( text);
+    ui->textEdit_3->setText(s);
     qDebug()<<"вывели"<< text;
 }
+
 
 void apcs::on_firstTypeMesageBut_clicked()
 {
