@@ -33,21 +33,24 @@ void system::send_message(std::string msg, uint8_t type){
 
 }
 void system::send_zero_type_message(std::string msg){
+    senderThread->start();
     if (source_code==SCS)
         senderThread->keep_sending=500;
     send_message(msg,INFORMATION_MESSAGE);
 }
 
 void system::send_first_type_message(std::string msg){
+    senderThread->start();
+
     senderThread->keep_sending=200;
     send_message(msg,WARNING_MESSAGE);
 
 }
 
 void system::send_fifth_type_message(){
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     senderThread->start();
-    std::string msg=" ";
-    qDebug()<<"5 type";
+    std::string msg="";
     send_message(msg,START_PROCESS_MESSAGE);
 }
 void system::send_second_type_message(std::string msg){

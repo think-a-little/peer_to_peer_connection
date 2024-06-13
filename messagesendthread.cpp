@@ -73,7 +73,6 @@ void MessageSendThread::run()
     broadcastAddr.sin_family = AF_INET;
     broadcastAddr.sin_addr.s_addr = inet_addr(BROADCAST_ADDRESS);
     broadcastAddr.sin_port = htons(BROADCAST_PORT);
-    emit messageSend();
     do{
         message=buffer;
         if (sendto(sock, message.c_str(), message.size(), 0, (struct sockaddr*)&broadcastAddr, sizeof(broadcastAddr))!= message.size()) {
@@ -84,6 +83,7 @@ void MessageSendThread::run()
         if (buffer[1]==INFORMATION_MESSAGE || buffer[1]==WARNING_MESSAGE)
             std::this_thread::sleep_for(std::chrono::milliseconds(keep_sending));
         qDebug()<<"Отправили" <<buffer << " " << keep_sending;
+        emit messageSend();
     }while (keep_sending!=0);
     ::close(sock);
 }
