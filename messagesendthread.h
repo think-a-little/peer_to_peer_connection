@@ -30,6 +30,7 @@ public:
     char buffer[1024];
     std::string message;
     void startSending();
+    int keep_sending;
 protected:
     void run() override;
 

@@ -24,7 +24,7 @@ void sks::updateTextEditSlot(const QString& text){
 //    s=s+sks_sender->recieve( text);
 //    ui->textEdit_3->setText(s);
     ui->textEdit_3->insertPlainText(sks_sender->recieve(text));
-    sks_sender->send_zero_type_message("");
+//    sks_sender->send_zero_type_message("");
     qDebug()<<"вывели"<< text;
 }
 
