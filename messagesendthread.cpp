@@ -80,6 +80,7 @@ void MessageSendThread::run()
             std::cerr << "Ошибка отправки сообщения" << std::endl;
             exit(EXIT_FAILURE);
         }
+        //denwjdnejndwe
         if (buffer[1]==INFORMATION_MESSAGE || buffer[1]==WARNING_MESSAGE)
             std::this_thread::sleep_for(std::chrono::milliseconds(keep_sending));
         qDebug()<<"Отправили" <<buffer << " " << keep_sending;
