@@ -33,12 +33,14 @@ void system::send_message(std::string msg, uint8_t type){
 
 }
 void system::send_zero_type_message(std::string msg){
+     senderThread->start();
     if (source_code==SCS)
         senderThread->keep_sending=500;
     send_message(msg,INFORMATION_MESSAGE);
 }
 
 void system::send_first_type_message(std::string msg){
+     senderThread->start();
     senderThread->keep_sending=200;
     send_message(msg,WARNING_MESSAGE);
 
