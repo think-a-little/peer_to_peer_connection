@@ -38,4 +38,5 @@ void dist_system::on_secondTypeMesageBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
+    sd->send_second_type_message(ui->secondTypeMsgText->toPlainText().toStdString());
 }

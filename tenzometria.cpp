@@ -41,6 +41,7 @@ void tenzometria::on_secondTypeMesageBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
+    tenz_sys->send_second_type_message(ui->secondTypeMsgText->toPlainText().toStdString());
 
 }
 

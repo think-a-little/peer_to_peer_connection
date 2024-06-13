@@ -23,8 +23,8 @@ apcs::~apcs()
 }
 void apcs::updateTextEditSlot(const QString& text){
 //    ui->textEdit_3->setText(as->recieve(text));
-    QString s= ui->textEdit_3->toPlainText();
-    s=s+as->recieve( text);
+    QString s= as->recieve( text);
+    s=s+ui->textEdit_3->toPlainText();
     ui->textEdit_3->setText(s);
     qDebug()<<"вывели"<< text;
 }
@@ -45,7 +45,12 @@ void apcs::on_firstTypeMesageBut_clicked()
 
 void apcs::on_secondTypeMesageBut_clicked()
 {
-
+    std::regex pattern("[a-zA-Z0-5-/]{1,16}");
+    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
+        ui->secondTypeMsgText->setText("Ошибка");
+        return;
+    }
+    as->send_second_type_message(ui->secondTypeMsgText->toPlainText().toStdString());
 }
 void apcs::finish() {
     if(sock == 0) ::close(sock);
@@ -62,16 +67,4 @@ void apcs::closeEvent(QCloseEvent *event)
 
 
 
-
-
-//void apcs::handleMessageSend()
-//{
-//    QByteArray ba = ui->firstTypeMsgText->toPlainText().toLatin1();
-//    char* ch = ba.data();
-//    for(int i=0; i<1024; i++) buffer[i]=ch[i];
-//}
-//void apcs::handleMessageReceived(const QString& message)
-//{
-//    ui->textEdit_3->insertPlainText(message+'\n');
-//}
 

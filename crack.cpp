@@ -32,7 +32,12 @@ void crack::on_firstTypeMesageBut_clicked()
 
 void crack::on_secondTypeMesageBut_clicked()
 {
-
+    std::regex pattern("[a-zA-Z0-5-/]{1,1}");
+    if (!(std::regex_match(ui->secondTypeMsgText->toPlainText().toStdString(),pattern)) ||(ui->secondTypeMsgText->toPlainText().length()>1 )){
+        ui->secondTypeMsgText->setText("Ошибка");
+        return;
+    }
+    cs->send_second_type_message(ui->secondTypeMsgText->toPlainText().toStdString());
 }
 
 void crack::closeEvent(QCloseEvent *event)
