@@ -50,7 +50,7 @@ void sks::on_secondTypeMsgBut_clicked()
         ui->secondTypeMsgText->setText("Ошибка");
         return;
     }
-
+    sks_sender->send_second_type_message(ui->secondTypeMsgText->toPlainText().toStdString());
 }
 
 void sks::finish() {
