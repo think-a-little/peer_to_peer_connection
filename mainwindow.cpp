@@ -75,10 +75,13 @@ void MainWindow::on_tenzometria_button_clicked()
 
 void MainWindow::on_dist_sys_button_clicked()
 {
-    dist_system_form = new dist_system(new QWidget());
-    this->hide();
-     dist_system_form->sd = new system_dist(LBORDER_SUBSYSTEM_DIST_VIS_WATCH);
-     dist_system_form->show();
+//    dist_system_form = new dist_system(new QWidget());
+//    this->hide();
+//     dist_system_form->sd = new system_dist(LBORDER_SUBSYSTEM_DIST_VIS_WATCH);
+//     dist_system_form->show();
+    distant_form= new distant(new QWidget());
+    distant_form->sd=new system_dist(LBORDER_SUBSYSTEM_DIST_VIS_WATCH);
+    distant_form->show();
 }
 
 void MainWindow::on_crack_sys_button_clicked()

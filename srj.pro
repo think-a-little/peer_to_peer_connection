@@ -24,6 +24,7 @@ SOURCES += \
     crack.cpp \
     crack_system.cpp \
     dist_system.cpp \
+    distant.cpp \
     fifthtypemessage.cpp \
     firsttypemassage.cpp \
     fourthtypemessage.cpp \
@@ -55,6 +56,7 @@ HEADERS += \
     crack.h \
     crack_system.h \
     dist_system.h \
+    distant.h \
     fifthtypemessage.h \
     firsttypemassage.h \
     fourthtypemessage.h \
@@ -82,6 +84,7 @@ FORMS += \
     apcs.ui \
     crack.ui \
     dist_system.ui \
+    distant.ui \
     mainwindow.ui \
     measerement_for.ui \
     sks.ui \

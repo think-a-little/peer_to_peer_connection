@@ -11,6 +11,7 @@
 #include "dist_system.h"
 #include "tenzometria.h"
 #include "apcs_system.h"
+#include "distant.h"
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -22,6 +23,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    distant* distant_form;
     apcs *apcs_form;
     stabilization *stabilization_form;
     measerement_for *measerement_form;
@@ -30,6 +32,7 @@ public:
     crack *crack_form;
     dist_system *dist_system_form;
     tenzometria *tenzometria_form;
+
 private slots:
 
     void on_sksButton_clicked();
