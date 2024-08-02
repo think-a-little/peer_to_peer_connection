@@ -16,6 +16,8 @@
 #include <unordered_map>
 #include "messagesendthread.h"
 #include "srj_consts.h"
+#include <QRandomGenerator>
+
 class system
 {
 public:

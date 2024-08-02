@@ -25,8 +25,14 @@ void sks::updateTextEditSlot(const QString& text){
         ui->textEdit_3->setText(s);
         qDebug()<<"вывели"<< text;
 //    ui->textEdit_3->insertPlainText(sks_sender->recieve(text));
-    if (text.toStdString()[1]==INFORMATION_MESSAGE || text.toStdString()[1]==PROCESS_FINISH_MESSAGE)
-        sks_sender->send_zero_type_message("");
+        std::string str_random;
+    if (text.toStdString()[1]==INFORMATION_MESSAGE || text.toStdString()[1]==PROCESS_FINISH_MESSAGE) {
+        for(int i = 0; i < 400; i++) {
+            int random = QRandomGenerator::global()->bounded(1, 9);
+            str_random.append(std::to_string(random));
+        }
+        sks_sender->send_zero_type_message(str_random);
+    }
 
 }
 

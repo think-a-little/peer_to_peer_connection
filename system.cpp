@@ -96,7 +96,7 @@ void system::send_message(std::string msg, uint8_t type){
 void system::send_zero_type_message(std::string msg){
     senderThread->start();
     if (source_code==SCS)
-        senderThread->keep_sending=500;
+        senderThread->keep_sending=50;
     send_message(msg,INFORMATION_MESSAGE);
 }
 
@@ -113,7 +113,7 @@ void system::send_fifth_type_message(){
     senderThread->start();
     senderThread->keep_sending=0;
     std::string msg="";
-    send_message(msg,START_PROCESS_MESSAGE);
+    send_message(msg,START_STATION_MESSAGE);
 }
 void system::send_second_type_message(std::string msg){
     senderThread->start();
